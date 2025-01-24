@@ -14,6 +14,7 @@ public struct PlatformInitArgs
 public class Platform : MonoBehaviour
 {
 	public static Action<Platform> OnReachEdge;
+	[SerializeField] private bool _dontHidePlatform;
 
 	private PlatformInitArgs _args;
 	public void Set(PlatformInitArgs args)
@@ -28,6 +29,8 @@ public class Platform : MonoBehaviour
 	
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		if(_dontHidePlatform)
+			return;
 		if (other.CompareTag("Edge"))
 			Hide().Forget();
 		if (other.CompareTag("Start"))
