@@ -14,6 +14,7 @@ public struct PlatformInitArgs
 public class Platform : MonoBehaviour
 {
 	public static Action<Platform> OnReachEdge;
+	public static Action<Rigidbody2D> OnPlayerGround;
 	[SerializeField] private bool _dontHidePlatform;
 
 	private PlatformInitArgs _args;
@@ -26,7 +27,19 @@ public class Platform : MonoBehaviour
 		pos.y = PlatformMover.PlatformHideLocation;
 		transform.localPosition = pos;
 	}
-	
+
+	private void OnCollisionEnter2D(Collision2D other)
+	{
+		if(other.collider.CompareTag("Player"))
+			OnPlayerGround?.Invoke(other.rigidbody);
+	}
+
+	private void OnCollisionExit2D(Collision2D other)
+	{
+		if(other.collider.CompareTag("Player"))
+			OnPlayerGround?.Invoke(null);
+	}
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if(_dontHidePlatform)

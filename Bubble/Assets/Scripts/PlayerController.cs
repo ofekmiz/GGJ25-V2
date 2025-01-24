@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     public void DisableEffect()
     {
-        throw new NotImplementedException();
+     
     }
 }
 

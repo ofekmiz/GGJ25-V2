@@ -19,6 +19,7 @@ public class PlatformMover : MonoBehaviour
     private Platform _startPlatformInstance;
 
     ObjectPool<Platform> _platformPool;
+    private Rigidbody2D _playerMove;
 
     private void OnDrawGizmos()
     {
@@ -37,15 +38,28 @@ public class PlatformMover : MonoBehaviour
     private void Update()
     {
         MovePlatform();
+        MovePlayerOnPlatforms();
+    }
+
+    private void MovePlayerOnPlatforms()
+    {
+        if(_playerMove)
+            _playerMove.position += new Vector2(-_moveRate * Time.deltaTime, 0);
     }
 
     private void GenerateMap()
     {
         Platform.OnReachEdge = ReleasePlatform;
+        Platform.OnPlayerGround = ApplyPlayerScrollMovement;
         _position = _distance;
         _startPlatformInstance = Instantiate(_startPlatform, _container);
         _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero, ShowOnStart = true});
         GenerateNext();
+    }
+
+    private void ApplyPlayerScrollMovement(Rigidbody2D player)
+    {
+        _playerMove = player;
     }
 
     private void GenerateNext()
