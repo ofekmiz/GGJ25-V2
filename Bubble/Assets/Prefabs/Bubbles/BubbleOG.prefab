@@ -215,6 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8246097928602306999}
+  - component: {fileID: 472097600619315393}
   m_Layer: 3
   m_Name: BubbleContainer
   m_TagString: Untagged
@@ -240,6 +241,19 @@ Transform:
   - {fileID: 3945379894704458812}
   m_Father: {fileID: 2056230613837896451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &472097600619315393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173976588410377789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3d4ab14478e41eab2759e6d0b4d4ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb: {fileID: 5034400570856768786}
 --- !u!1 &8957163402779442014
 GameObject:
   m_ObjectHideFlags: 0
