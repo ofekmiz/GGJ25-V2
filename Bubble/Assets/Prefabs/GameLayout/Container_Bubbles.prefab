@@ -496,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6604984379005079292, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: _startingBubbles
-      value: 10
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6604984379005079292, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: _spawnPoints.Array.size
