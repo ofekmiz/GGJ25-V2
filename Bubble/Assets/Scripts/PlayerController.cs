@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Effect"))
         {
-            Effect effectToTake;
+            Effect effectToTake = new Effect();
             PlayerEffect.Invoke(effectToTake);
         }
         else if (collision.gameObject.CompareTag("Blocker"))
