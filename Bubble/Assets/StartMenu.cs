@@ -1,3 +1,4 @@
+using Domains.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class StartMenu : MonoBehaviour
     [SerializeField]
     private Button _startBtn;
 
+    [SerializeField]
+    private GameManager _gm;
+
     private void Awake()
     {
         _startBtn.onClick.AddListener(OnStartClicked);
@@ -16,7 +20,8 @@ public class StartMenu : MonoBehaviour
 
     private void OnStartClicked()
     {
-        SceneManager.LoadScene("GameScene");
+        gameObject.SetActive(false);
+        _gm.Init();
     }
 
     private void OnDestroy()

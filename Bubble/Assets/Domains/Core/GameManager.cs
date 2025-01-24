@@ -25,7 +25,7 @@ namespace Domains.Core
         public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
 
-        private void Awake()
+        public void Init()
         {
             _dependencies = new()
             {
