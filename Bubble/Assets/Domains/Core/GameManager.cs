@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Domains.Bubbles.Factories;
@@ -11,9 +12,13 @@ namespace Domains.Core
     public class GameManager : MonoBehaviour
     {
         [Header("Bubble Pool")]
-        [SerializeField] private BubbleFactory _bubbleFactory;
+        [SerializeField] BubbleFactory _bubbleFactory;
         [SerializeField] private Transform _bubblePoolParent;
 
+        [SerializeField] private PlayerController _playerManager;
+
+        // private List<PlatformerItem> _platformItems;
+        // private EffectsManager _effectsManager;
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
 
@@ -25,6 +30,10 @@ namespace Domains.Core
             _dependencies.BubbleFactory = _bubbleFactory;
 
             _bubbleFactory.Init(this, _bubblePoolParent);
+
+            // _platformItems = new List<PlatformerItem>();
+            //
+            // _effectsManager = new EffectsManager(_dependencies);
         }
 
         private void Start()
