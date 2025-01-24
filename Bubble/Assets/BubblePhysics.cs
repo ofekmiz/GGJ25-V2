@@ -5,7 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Jobs;
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class BubblePhysics : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleSystem;
@@ -14,7 +14,7 @@ public class BubblePhysics : MonoBehaviour
     [SerializeField] private Color _endColor;
 
     [SerializeField] private List<Sprite> _sprites;
-    private SpriteRenderer _thisSprite;
+    [SerializeField] private SpriteRenderer _bubbleSprite;
 
     private readonly List<BubblePhysics> _connected = new();
 
@@ -35,7 +35,6 @@ public class BubblePhysics : MonoBehaviour
         Rb.velocity = new(Random.Range(-2, 2), Random.Range(-2, 2));
         transform.position += new Vector3(0.1f, 0.1f, 0.1f);
         setRandomColor();
-        _thisSprite = GetComponent<SpriteRenderer>();
     }
 
     public void SetCenter(Transform center, float radius)
@@ -49,7 +48,7 @@ public class BubblePhysics : MonoBehaviour
         //var main = _particleSystem.main;
         //main.startColor = Color.Lerp(_startColor, _endColor, Random.Range(0f,1f));
         var randSprite = _sprites[Random.Range(0, _sprites.Count)];
-        _thisSprite.sprite = randSprite;
+        _bubbleSprite.sprite = randSprite;
     }
 
     private void FixedUpdate()
