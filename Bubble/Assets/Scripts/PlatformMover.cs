@@ -44,7 +44,7 @@ public class PlatformMover : MonoBehaviour
         Platform.OnReachEdge = ReleasePlatform;
         _position = _distance;
         _startPlatformInstance = Instantiate(_startPlatform, _container);
-        _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero});
+        _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero, ShowOnStart = true});
         GenerateNext();
     }
 
