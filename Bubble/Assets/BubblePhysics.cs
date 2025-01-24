@@ -7,42 +7,33 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class BubblePhysics : MonoBehaviour
 {
-    private List<BubblePhysics> _connected = new();
+    private readonly List<BubblePhysics> _connected = new();
 
-    private List<SpringJoint2D> _springs = new();
+    private readonly List<SpringJoint2D> _springs = new();
 
-    private Rigidbody2D _rb;
+    private Rigidbody2D Rb { get; set; }
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.velocity = new Vector2(Random.Range(-2, 2), Random.Range(-2, 2));
+        Rb = GetComponent<Rigidbody2D>();
+        Rb.velocity = new(Random.Range(-2, 2), Random.Range(-2, 2));
         transform.position += new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     private void FixedUpdate()
     {
-        accelerateBubble(Time.fixedDeltaTime);
-        applyCenterForce();
+        AccelerateBubble(Time.fixedDeltaTime);
+        ApplyCenterForce();
     }
 
-    public bool IsConnectedTo(BubblePhysics bubble)
-    {
-        if (_connected.Contains(bubble) || bubble.Connected.Contains(this))
-        {
-            return true;
-        }
-        return false;
-    }
+    private bool IsConnectedTo(BubblePhysics bubble) => _connected.Contains(bubble) || bubble.Connected.Contains(this);
 
     private SpringJoint2D GetSpringConnectedTo(BubblePhysics bubble)
     {
         foreach (var spring in _springs)
         {
             if (spring.connectedBody == bubble.Rb)
-            {
                 return spring;
-            }
         }
         return null;
     }
@@ -53,16 +44,16 @@ public class BubblePhysics : MonoBehaviour
 
         if (otherBubble == null) return;
 
-        if (!IsConnectedTo(otherBubble) && _connected.Count <= 0)
-        {
-            var thisSpring = gameObject.AddComponent<SpringJoint2D>();
-            thisSpring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
-            thisSpring.autoConfigureDistance = false;
-            thisSpring.distance = 3f;
-            thisSpring.frequency = 0.5f;
-            _springs.Add(thisSpring);
-            _connected.Add(otherBubble);
-        }
+        if (IsConnectedTo(otherBubble) || _connected.Count > 0)
+            return;
+
+        var thisSpring = gameObject.AddComponent<SpringJoint2D>();
+        thisSpring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
+        thisSpring.autoConfigureDistance = false;
+        thisSpring.distance = 3f;
+        thisSpring.frequency = 0.5f;
+        _springs.Add(thisSpring);
+        _connected.Add(otherBubble);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -71,41 +62,38 @@ public class BubblePhysics : MonoBehaviour
         
         if (otherBubble == null) return;
 
-        if (IsConnectedTo(otherBubble))
-        {
-            var springConnected = GetSpringConnectedTo(otherBubble);
-            if (springConnected != null)
-            {
-                _springs.Remove(springConnected);
-                Destroy(springConnected);
-                _connected.Remove(otherBubble);
-            }
-        }    
+        if (!IsConnectedTo(otherBubble))
+            return;
+
+        var springConnected = GetSpringConnectedTo(otherBubble);
+        if (springConnected == null)
+            return;
+
+        _springs.Remove(springConnected);
+        Destroy(springConnected);
+        _connected.Remove(otherBubble);
     }
 
-    private void accelerateBubble(float dt)
+    private void AccelerateBubble(float dt)
     {
-        float targetSpeed = 4f;
-        float acc = 0.5f;
+        const float targetSpeed = 4f;
+        const float acc = 0.5f;
 
-        float vel = _rb.velocity.magnitude;
+        var vel = Rb.velocity.magnitude;
+
         if (vel < targetSpeed)
-        {
-            _rb.velocity += _rb.velocity.normalized * dt * acc;
-        }
+            Rb.velocity += Rb.velocity.normalized * (dt * acc);
     }
 
-    private void applyCenterForce()
+    private void ApplyCenterForce()
     {
-        float acc = 2f;
+        const float acc = 2f;
 
         var center = BubbleSpawner.Instance.SpawningArea.bounds.center;
         var distToCenter = (center - transform.position);
-        _rb.AddForce(distToCenter * acc, ForceMode2D.Force);
+        Rb.AddForce(distToCenter * acc, ForceMode2D.Force);
 
     }
 
-    public List<BubblePhysics> Connected => _connected;
-
-    public Rigidbody2D Rb => _rb;
+    private List<BubblePhysics> Connected => _connected;
 }

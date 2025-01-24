@@ -28,6 +28,6 @@ public class PlayerController : MonoBehaviour, IConstructed
 
     public void Construct(in Dependencies d)
     {
-        _gameOverManager = d.gameOverManager;
+        _gameOverManager = d.GameOverManager;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Domains.Bubbles.BubbleSpawner;
 using Domains.Bubbles.Factories;
@@ -15,7 +14,7 @@ namespace Domains.Core
 		public GameManager GameManager;
 		public IBubbleFactory BubbleFactory;
 		public BubblesManager BubblesManager;
-		public GameOverManager gameOverManager;
+		public GameOverManager GameOverManager;
 		public List<PlatformerItem> PlatformerItems;
 	}
 }
