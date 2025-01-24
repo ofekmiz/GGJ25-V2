@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!1 &5698804611006033544
 GameObject:
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!61 &4834142109542278094
 BoxCollider2D:
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bf1c3fac71422a8e0201c5438bd8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dontHidePlatform: 0
 --- !u!50 &2769652750312403699
 Rigidbody2D:
   serializedVersion: 4
