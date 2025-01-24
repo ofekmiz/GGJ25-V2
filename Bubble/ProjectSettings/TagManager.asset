@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Edge
   layers:
   - Default
   - TransparentFX
@@ -41,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: AAAAAAAAAA
-    uniqueID: 1489606133
+  - name: Dream
+    uniqueID: 3017715985
+    locked: 0
+  - name: Bubbles
+    uniqueID: 602017753
     locked: 0

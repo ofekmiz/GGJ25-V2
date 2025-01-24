@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Domains.Bubbles.BubbleSpawner;
@@ -16,6 +17,7 @@ namespace Domains.Core
         [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
+        [SerializeField] private PlayerController _playerManager;
 
         private Dependencies _dependencies;
 

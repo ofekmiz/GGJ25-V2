@@ -1,43 +1,71 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PlatformMover : MonoBehaviour
 {
-    private Transform _trn;
-    private float _moveRate = 1f;
+    [SerializeField] private Platform _platform;
+    [SerializeField] private Platform _startPlatform;
+    [SerializeField] private Transform _container;
+    [SerializeField] private int _alivePlatforms = 20;
+    [SerializeField] private int _minAlivePlatforms = 10;
+    [SerializeField] private float _moveRate = 1f;
+    [SerializeField] private float _distance = 1f;
+    [SerializeField] private Vector2 _maxMinHeight;
+    private float _position;
+    private int _platformCount;
+    private Platform _startPlatformInstance;
 
-
+    ObjectPool<Platform> _platformPool;
 
     private void Awake()
     {
-        _trn = transform;
-
+        _platformPool = new ObjectPool<Platform>(() => Instantiate(_platform, _container),
+            t => t.gameObject.SetActive(true),
+            t => t.gameObject.SetActive(false));
         GenerateMap();
-        
-
     }
-    private void FixedUpdate()
+    private void Update()
     {
-
-
         MovePlatform();
-        StrechTail(); // generate the continuation of the map
-
-    }
-
-    private void StrechTail()
-    {
     }
 
     private void GenerateMap()
     {
+        Platform.OnReachEdge = ReleasePlatform;
+        _position = _distance;
+        _startPlatformInstance = Instantiate(_startPlatform, _container);
+        _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero});
+        GenerateNext();
+    }
+
+    private void GenerateNext()
+    {
+        for (int i = _platformCount; i < _alivePlatforms; i++)
+        {
+            var platform = _platformPool.Get();
+            _position += _distance;
+            var pos = Vector3.right * _position;
+            pos.y = Random.Range(_maxMinHeight.x, _maxMinHeight.y);
+            platform.Set(new() {Position = pos});
+            _platformCount++;
+        }
+    }
+
+    private void ReleasePlatform(Platform platform)
+    {
+        if (_startPlatformInstance == platform)
+        {
+            _startPlatformInstance.gameObject.SetActive(false);
+            return;
+        }
+        _platformPool.Release(platform);
+        _platformCount--;
+        if (_platformCount <= _minAlivePlatforms)
+            GenerateNext();
     }
 
     private void MovePlatform()
     {
-        _trn.position += new Vector3(_moveRate, 0, 0);
+        _container.position += new Vector3(-_moveRate * Time.deltaTime, 0, 0);
     }
 }
