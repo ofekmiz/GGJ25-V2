@@ -11,9 +11,22 @@ public class BubbleSpawner : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _spawnArea;
 
+    [SerializeField]
+    private List<Transform> _spawnPoints;
+
     private List<BubblePhysics> _bubbles = new();
 
-    private int _startingBubbles = 15;
+    [SerializeField]
+    private int _startingBubbles = 100;
+
+    [SerializeField]
+    private int _delayBetweenBubbles = 500;
+
+    [SerializeField]
+    private Transform _center;
+
+    [SerializeField]
+    private float _radius;
 
     public static BubbleSpawner Instance { get; private set; }
 
@@ -25,8 +38,10 @@ public class BubbleSpawner : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < _startingBubbles; i++) {
+        for (int i = 0; i < _startingBubbles; i++)
+        {
             SpawnRandom();
+            UniTask.Delay(_delayBetweenBubbles);
         }
     }
 
@@ -38,21 +53,22 @@ public class BubbleSpawner : MonoBehaviour
     private void SpawnRandom()
     {
         Bounds spawnBounds = _spawnArea.bounds;
-        Vector2 spawnPoint = new Vector2(Random.Range(spawnBounds.min.x, spawnBounds.max.x), Random.Range(spawnBounds.min.y, spawnBounds.max.y)); 
-        Spawn(spawnPoint);
+        var angle = Random.Range(0, Mathf.PI * 2);
+        var radMin = _radius;
+        var radMax = _radius - 2f;
+        var radius = Random.Range(radMin, radMax);
+        var pointToSpawn = _center.position + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius);
+        //Vector2 spawnPoint = new Vector2(Random.Range(spawnBounds.min.x, spawnBounds.max.x), Random.Range(spawnBounds.min.y, spawnBounds.max.y)); 
+        Spawn(pointToSpawn);
     }
 
     private void Spawn(Vector2 pos)
     {
-        var bubble = Instantiate(_bubblePrefab);
+        var bubble = Instantiate(_bubblePrefab, this.transform);
+        bubble.SetCenter(_center, _radius);
         _bubbles.Add(bubble);
         bubble.transform.position = pos;
     }
 
     public SpriteRenderer SpawningArea => _spawnArea;
-    
-    //private UniTask SpawnOne()
-    //{
-
-    //}
 }

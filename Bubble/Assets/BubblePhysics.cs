@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Jobs;
 
 [RequireComponent(typeof(Collider2D))]
 public class BubblePhysics : MonoBehaviour
@@ -13,6 +14,13 @@ public class BubblePhysics : MonoBehaviour
 
     private Rigidbody2D Rb { get; set; }
 
+    private Transform _center;
+
+    private float _radius;
+
+    private float _noiseSpeed = 0.1f;
+    private float _noiseFactor = 20f;
+
     private void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
@@ -20,10 +28,22 @@ public class BubblePhysics : MonoBehaviour
         transform.position += new Vector3(0.1f, 0.1f, 0.1f);
     }
 
+    public void SetCenter(Transform center, float radius)
+    {
+        _center = center;
+        _radius = radius;
+    }
+
     private void FixedUpdate()
     {
-        AccelerateBubble(Time.fixedDeltaTime);
-        ApplyCenterForce();
+        accelerateBubble(Time.fixedDeltaTime);
+        applyCenterForce();
+        ApplyNoiseForce();
+
+        if (Vector3.Distance(_center.position, transform.position) > _radius)
+        {
+            //Destroy(gameObject);
+        }
     }
 
     private bool IsConnectedTo(BubblePhysics bubble) => _connected.Contains(bubble) || bubble.Connected.Contains(this);
@@ -44,16 +64,16 @@ public class BubblePhysics : MonoBehaviour
 
         if (otherBubble == null) return;
 
-        if (IsConnectedTo(otherBubble) || _connected.Count > 0)
-            return;
-
-        var thisSpring = gameObject.AddComponent<SpringJoint2D>();
-        thisSpring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
-        thisSpring.autoConfigureDistance = false;
-        thisSpring.distance = 3f;
-        thisSpring.frequency = 0.5f;
-        _springs.Add(thisSpring);
-        _connected.Add(otherBubble);
+        if (!IsConnectedTo(otherBubble) && _connected.Count <= 0)
+        {
+            var thisSpring = gameObject.AddComponent<SpringJoint2D>();
+            thisSpring.connectedBody = other.gameObject.GetComponent<Rigidbody2D>();
+            thisSpring.autoConfigureDistance = false;
+            thisSpring.distance = 1f;
+            thisSpring.frequency = 0.5f;
+            _springs.Add(thisSpring);
+            _connected.Add(otherBubble);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -95,5 +115,14 @@ public class BubblePhysics : MonoBehaviour
 
     }
 
-    private List<BubblePhysics> Connected => _connected;
+    private void ApplyNoiseForce()
+    {
+        var noiseX = Mathf.PerlinNoise(transform.position.x + Time.time * _noiseSpeed, transform.position.y + Time.time * _noiseSpeed);
+        var noiseY = Mathf.PerlinNoise(transform.position.x + Time.time * 2 * _noiseSpeed, transform.position.y + Time.time * 2 * _noiseSpeed);
+        _rb.AddForce(new Vector2(noiseX * _noiseFactor, noiseY * _noiseFactor));
+    }
+
+    public List<BubblePhysics> Connected => _connected;
+
+    public Rigidbody2D Rb => _rb;
 }
