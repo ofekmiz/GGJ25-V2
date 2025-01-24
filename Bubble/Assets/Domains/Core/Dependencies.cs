@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Domains.Bubbles.BubbleSpawner;
 using Domains.Bubbles.Factories;
 
 namespace Domains.Core
@@ -11,7 +12,9 @@ namespace Domains.Core
 
 	public struct Dependencies
 	{
+		public GameManager GameManager;
 		public IBubbleFactory BubbleFactory;
+		public BubblesManager BubblesManager;
 		public GameOverManager gameOverManager;
 		public List<PlatformerItem> PlatformerItems;
 	}
