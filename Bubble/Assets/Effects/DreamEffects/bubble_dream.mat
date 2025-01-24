@@ -50,10 +50,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _noiseStrength: 9.09
-    - _size: 0.307
-    - _xStrength: 0.5
-    - _yStrength: 0.5
+    - _noiseStrength: 10
+    - _size: 0.42
+    - _xStrength: 0.2
+    - _yStrength: 0.2
     m_Colors:
     - _Color: {r: 5.278032, g: 5.278032, b: 5.278032, a: 1}
   m_BuildTextureStacks: []
