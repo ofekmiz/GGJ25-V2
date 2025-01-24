@@ -16,7 +16,6 @@ public class Platform : MonoBehaviour
 	public static Action<Platform> OnReachEdge;
 	public static Action<Rigidbody2D> OnPlayerGround;
 	[SerializeField] private bool _dontHidePlatform;
-	[SerializeField] public AnimationCurve _platformAnimationCurve;
 
 	private PlatformInitArgs _args;
 	public void Set(PlatformInitArgs args)
@@ -53,12 +52,12 @@ public class Platform : MonoBehaviour
 
 	private async UniTaskVoid Hide()
 	{
-		await transform.DOLocalMoveY(PlatformMover.PlatformHideLocation, .5f).SetEase(_platformAnimationCurve).AsyncWaitForCompletion();
+		await transform.DOLocalMoveY(PlatformMover.PlatformHideLocation, .5f).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 		OnReachEdge?.Invoke(this);
 	}
 	
 	private async UniTaskVoid Show()
 	{
-		await transform.DOLocalMoveY(_args.Position.y, 1).SetEase(_platformAnimationCurve).AsyncWaitForCompletion();
+		await transform.DOLocalMoveY(_args.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 	}
 }
