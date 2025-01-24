@@ -5,29 +5,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IConstructed
 {
-    public event Action PlayerDead;
-
-    public event Action<Effect> PlayerEffect;
-
-    [SerializeField]
-    private GameManager _gameOverManager;
+    private GameOverManager _gameOverManager;
+    private EffectsManager _effects;    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hazard"))
         {
-            PlayerDead?.Invoke();
+            _gameOverManager.OnGameOver();
         }
         else if (collision.gameObject.CompareTag("Effect"))
         {
             Effect effectToTake = new Effect();
-            PlayerEffect.Invoke(effectToTake);
         }
         else if (collision.gameObject.CompareTag("Blocker"))
         {
             // TODO
         }
+    }
+
+    public void Construct(in Dependencies d)
+    {
+        _gameOverManager = d.gameOverManager;
     }
 }
