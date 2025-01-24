@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Domains.Bubbles.BubbleSpawner;
 using Domains.Bubbles.Factories;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,19 +13,28 @@ namespace Domains.Core
     {
         [Header("Bubble Pool")]
         [SerializeField] private BubbleFactory _bubbleFactory;
+        [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
-
-        public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
 
         private Dependencies _dependencies;
 
 
+        public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
+        public BubblesManager BubblesManager => _dependencies.BubblesManager;
+
+
         private void Awake()
         {
-            _dependencies.BubbleFactory = _bubbleFactory;
+            _dependencies = new()
+            {
+                GameManager = this,
+                BubbleFactory = _bubbleFactory,
+                BubblesManager = _bubblesManager,
+            };
 
             _bubbleFactory.Init(this, _bubblePoolParent);
+            _bubblesManager.Init(this, BubbleFactory);
         }
 
         private void Start()

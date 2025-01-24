@@ -521,34 +521,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717010776}
-  - component: {fileID: 717010775}
+  - component: {fileID: 717010777}
   m_Layer: 0
-  m_Name: BubbleSpawner
+  m_Name: BubbleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &717010775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717010774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f89ea90eefa3d4376946b87a9a99ffbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gm: {fileID: 768985189}
-  _bubblesParent: {fileID: 919632554}
-  _bubbleSpawnOrigin: {fileID: 712865498}
-  _bubbleSpawnOriginOffsetRange: 7.66
-  _spawnIntervalSeconds: 0.21
-  _bubbleFloatForce: 0.55
-  _bubbleTravelDistance: 7.09
-  _bubbleLifeSeconds: 7
 --- !u!4 &717010776
 Transform:
   m_ObjectHideFlags: 0
@@ -562,10 +542,29 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 712865498}
   - {fileID: 919632554}
+  - {fileID: 712865498}
   m_Father: {fileID: 187307187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717010777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717010774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f89ea90eefa3d4376946b87a9a99ffbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bubblesParent: {fileID: 919632554}
+  _bubbleSpawnOrigin: {fileID: 712865498}
+  _bubbleSpawnOriginOffsetRange: 6.99
+  _spawnIntervalSeconds: 0.26
+  _bubbleFloatForce: 2.62
+  _bubbleTravelDistance: 7.49
+  _bubbleLifeSeconds: 8.4
 --- !u!1 &768985187
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bubbleFactory: {fileID: 11400000, guid: f7b8b67172a6540f9b447fe1e8f82ca7, type: 2}
+  _bubblesManager: {fileID: 717010777}
   _bubblePoolParent: {fileID: 633143016}
 --- !u!1 &919632553
 GameObject:
