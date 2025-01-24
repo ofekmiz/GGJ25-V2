@@ -50,7 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _noiseStrength: 3
+    - _noiseStrength: 1
     - _size: 2
     - _xStrength: 0.5
     - _yStrength: 0.5
