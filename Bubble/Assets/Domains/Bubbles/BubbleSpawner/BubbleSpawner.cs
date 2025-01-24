@@ -12,16 +12,26 @@ namespace Domains.Bubbles.BubbleSpawner
 {
 	public class BubbleSpawner : MonoBehaviour
 	{
+		[Header("Dependencies")]
 		[SerializeField] private GameManager _gm;
+
+		[Header("Refs")]
 		[SerializeField] private Transform _bubblesParent;
 		[SerializeField] private Transform _bubbleSpawnOrigin;
-		[SerializeField] [Range(0, 10f)] private float _bubbleSpawnOriginOffsetRange;
-		[SerializeField] [Range(0.1f, 3f)] private float _spawnIntervalSeconds = 0.5f;
-		[SerializeField] [Range(1f, 10f)] private float _bubbleFloatSpeed = 0.5f;
-		[SerializeField] [Range(1f, 10f)] private float _bubbleTravelDistance = 0.5f;
+
+		[Header("Config")]
+		[SerializeField] [Min(0)] private float _bubbleSpawnOriginOffsetRange;
+		[SerializeField] [Min(0)] private float _spawnIntervalSeconds = 0.5f;
+		[SerializeField] [Min(0.1f)] private float _bubbleFloatForce = 0.1f;
+		[SerializeField] [Min(0)] private float _bubbleTravelDistance = 0.5f;
+		[SerializeField] [Min(float.Epsilon)] private float _bubbleLifeSeconds = 4f;
+
+
+		private readonly List<Bubble> _bubbles = new();
+
 
 		private IBubbleFactory BubbleFactory => _gm.BubbleFactory;
-		private readonly List<Bubble> _bubbles = new();
+
 
 		private void Awake()
 		{
@@ -36,25 +46,30 @@ namespace Domains.Bubbles.BubbleSpawner
 
 		private void Update()
 		{
+			ForeachBubble(bubble =>
+			{
+				bubble.SecondsAlive += Time.deltaTime;
+
+				if (bubble.SecondsAlive >= _bubbleLifeSeconds)
+					return HandleBubbleResult.CanRemove;
+
+				if (_bubbleTravelDistance > Mathf.Abs(bubble.transform.position.y - _bubbleSpawnOrigin.position.y))
+					return HandleBubbleResult.Nothing;
+
+				return HandleBubbleResult.CanRemove;
+			});
+		}
+
+		private void FixedUpdate()
+		{
 			if (_bubbles is null || _bubbles.Count is 0)
 				return;
 
-			var removeCount = 0;
-			for (var i = _bubbles.Count - 1; i >= 0; i--)
+			ForeachBubble(bubble =>
 			{
-				var bubble = _bubbles[i];
-				bubble.transform.position += _bubbleFloatSpeed * Time.deltaTime * Vector3.up;
-
-				if (Mathf.Abs(bubble.transform.position.y - _bubbleSpawnOrigin.position.y) < _bubbleTravelDistance)
-					continue;
-
-				removeCount++;
-				_bubbles[i] = _bubbles[^removeCount];
-				BubbleFactory.Recycle(bubble);
-			}
-
-			if (removeCount > 0)
-				_bubbles.RemoveRange(_bubbles.Count - removeCount, removeCount);
+				bubble.Rigidbody.AddForce(Vector3.up * _bubbleFloatForce, ForceMode2D.Force);
+				return HandleBubbleResult.Nothing;
+			});
 		}
 
 		private async UniTask StartBubbling(CancellationToken ct)
@@ -67,9 +82,12 @@ namespace Domains.Bubbles.BubbleSpawner
 
 					var bubble = BubbleFactory.GetBubble(_bubblesParent);
 					{
+						bubble.gameObject.SetActive(true);
 						bubble.transform.position = _bubbleSpawnOrigin.position;
 						var offset = Random.Range(-1.0f, 1.0f) * _bubbleSpawnOriginOffsetRange;
 						bubble.transform.position += new Vector3(offset, 0, 0);
+
+						bubble.SecondsAlive = 0;
 					}
 
 					_bubbles.Add(bubble);
@@ -82,26 +100,30 @@ namespace Domains.Bubbles.BubbleSpawner
 			}
 		}
 
-		// private async UniTask FloatBubble(Bubble bubble, float distance, CancellationToken ct)
-		// {
-		// 	try
-		// 	{
-		// 		var startPosition = bubble.transform.position;
-		// 		while (ct.IsCancellationRequested)
-		// 		{
-		// 			if (Mathf.Abs(bubble.transform.position.y - startPosition.y) >= distance)
-		// 				break;
-		//
-		// 			bubble.transform.position += Vector3.up * distance * Time.deltaTime;
-		// 			await UniTask.DelayFrame(1, cancellationToken: ct);
-		// 		}
-		// 	}
-		// 	catch (OperationCanceledException) { }
-		// 	catch (Exception e) { Debug.LogException(e, this); }
-		// 	finally
-		// 	{
-		// 		BubbleFactory.Recycle(bubble);
-		// 	}
-		// }
+		private void ForeachBubble(Func<Bubble, HandleBubbleResult> bubbleHandler)
+		{
+			var removeCount = 0;
+			for (var i = _bubbles.Count - 1; i >= 0; i--)
+			{
+				var bubble = _bubbles[i];
+				switch (bubbleHandler(bubble))
+				{
+					case HandleBubbleResult.Nothing: continue;
+					case HandleBubbleResult.CanRemove:
+						_bubbles[i] = _bubbles[^++removeCount];
+						BubbleFactory.Recycle(bubble);
+						continue;
+				}
+			}
+
+			if (removeCount > 0)
+				_bubbles.RemoveRange(_bubbles.Count - removeCount, removeCount);
+		}
+	}
+
+	public enum HandleBubbleResult
+	{
+		Nothing,
+		CanRemove,
 	}
 }

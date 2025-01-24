@@ -9,7 +9,7 @@ namespace Domains.Bubbles.Factories
     public interface IBubbleFactory
     {
         Bubble GetBubble(Transform parent = null);
-        void Recycle(Bubble bubble);
+        void Recycle(Bubble bubble, bool deactivate = true);
     }
 
     [CreateAssetMenu(fileName = "BubbleFactory", menuName = "Bubbles/Factory")]
@@ -41,9 +41,13 @@ namespace Domains.Bubbles.Factories
             return bubble;
         }
 
-        public void Recycle(Bubble bubble)
+        public void Recycle(Bubble bubble, bool deactivate = true)
         {
             _pool.Push(bubble);
+
+            if (deactivate)
+                bubble.gameObject.SetActive(false);
+
             bubble.transform.SetParent(_bubblePoolParent);
         }
 
