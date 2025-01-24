@@ -1,24 +1,26 @@
+using System;
+using Domains.Core;
 using UnityEngine;
 
 namespace Domains.Bubbles.BubbleEntity
 {
-
-    public interface IBubble
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Bubble : MonoBehaviour, IConstructed
     {
-    }
+        public void Construct(in Dependencies deps) { }
 
-    public class Bubble : MonoBehaviour, IBubble
-    {
-        // Start is called before the first frame update
-        void Start()
+        public Rigidbody2D Rigidbody { get; private set; }
+        public float SecondsAlive { get; set; }
+
+
+        private void Awake()
         {
-        
+            Rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
-        
+            Rigidbody.gravityScale = 0;
         }
     }
 }
