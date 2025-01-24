@@ -163,6 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28066ec798db26a43a290b7b29d44d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 2145779238971489445}
+  _startColor: {r: 0.57078433, g: 0.97222817, b: 0.9811321, a: 1}
+  _endColor: {r: 0.084905505, g: 0.6169588, b: 1, a: 1}
 --- !u!58 &3310852991131699833
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -315,6 +318,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}
+--- !u!198 &2145779238971489445 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1466572514678734613, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}
+  m_PrefabInstance: {fileID: 692737645315048368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4137076317009640020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3527657483269126628, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}

@@ -8,6 +8,11 @@ using UnityEngine.Jobs;
 [RequireComponent(typeof(Collider2D))]
 public class BubblePhysics : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particleSystem;
+
+    [SerializeField] private Color _startColor;
+    [SerializeField] private Color _endColor;
+
     private readonly List<BubblePhysics> _connected = new();
 
     private readonly List<SpringJoint2D> _springs = new();
@@ -26,12 +31,19 @@ public class BubblePhysics : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         Rb.velocity = new(Random.Range(-2, 2), Random.Range(-2, 2));
         transform.position += new Vector3(0.1f, 0.1f, 0.1f);
+        setRandomColor();
     }
 
     public void SetCenter(Transform center, float radius)
     {
         _center = center;
         _radius = radius;
+    }
+
+    private void setRandomColor()
+    {
+        var main = _particleSystem.main;
+        main.startColor = Color.Lerp(_startColor, _endColor, Random.Range(0f,1f));
     }
 
     private void FixedUpdate()
