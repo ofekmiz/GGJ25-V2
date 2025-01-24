@@ -5,18 +5,36 @@ using UnityEngine;
 
 public class EffectsManager
 {
-    private GameManager _gm;
+    private static Dictionary<string,IEffectable> _effectables = new();
 
-    private List<PlatformerItem> _platformerItems;
-
-    public void ApplyEffect(Effect e, EffectTarget target)
+    public static void Subscribe(string key, IEffectable effectable)
     {
-        
+        _effectables.Add(key, effectable);
+    }
+    
+    public static void Unsubscribe(string key)
+    {
+        _effectables.Remove(key);
     }
 
-    public EffectsManager(in Dependencies d)
+    public void PlayEffect(EffectArgs args)
     {
-        _platformerItems = d.PlatformerItems;
-        Debug.Log($"Effects Manager created with pItems = {_platformerItems}");
+        if (!_effectables.TryGetValue(args.Type, out var effectable))
+        {
+            Debug.LogError($"Tried to play effect {args.Type} but it doesn't exist");
+            return;
+        }
+        effectable.ApplyEffect(args);
+    }
+    
+    public void DisableEffect(string effectType)
+    {
+        if (!_effectables.TryGetValue(effectType, out var effectable))
+        {
+            Debug.LogError($"Tried to disable effect {effectType} but it doesn't exist");
+            return;
+        }
+        
+        effectable.DisableEffect();
     }
 }

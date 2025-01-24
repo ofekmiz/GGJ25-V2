@@ -15,6 +15,6 @@ namespace Domains.Core
 		public IBubbleFactory BubbleFactory;
 		public BubblesManager BubblesManager;
 		public GameOverManager GameOverManager;
-		public List<PlatformerItem> PlatformerItems;
+		public List<EffectItem> PlatformerItems;
 	}
 }

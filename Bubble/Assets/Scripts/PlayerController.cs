@@ -1,11 +1,9 @@
-using Domains.Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour , IEffectable
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
@@ -13,20 +11,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundCheck;
-    [SerializeField] private float _fallIncreameant;
+    [SerializeField] private float _fallIncrement = 10;
     
     public static Action OnPlayerDeath;
+    public static Action<EffectArgs> OnPlayerCollectEffect;
     private const string Horizontal = "Horizontal";
     
-    private EffectsManager _effects;
+    private PlayerSettings _playerSettings; 
     private bool _isGrounded;
     private float _moveDirection;
     private float _jumpDirection;
+    
+    private struct PlayerSettings
+    {
+        public float MoveSpeed;
+        public float JumpForce;
+        public float FallIncrement;
+    }
 
     private void OnDrawGizmos()
     {
         if(_groundCheck)
             Gizmos.DrawWireSphere(_groundCheck.position, _groundCheckRadius);
+    }
+
+    private void Awake()
+    {
+        EffectsManager.Subscribe("jetpack", this);
+        _playerSettings = new()
+        {
+            MoveSpeed = _moveSpeed,
+            JumpForce = _jumpForce,
+            FallIncrement = _fallIncrement
+        };
     }
 
     public void Update()
@@ -43,10 +60,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        _rigidbody.position += new Vector2(_moveDirection * _moveSpeed * Time.fixedDeltaTime, 0f);
+        _rigidbody.position += new Vector2(_moveDirection * _playerSettings.MoveSpeed * Time.fixedDeltaTime, 0f);
         if (_jumpDirection > 0)
         {
-            _rigidbody.velocity = Vector2.up * _jumpForce;
+            _rigidbody.velocity = Vector2.up * _playerSettings.JumpForce;
             _jumpDirection = 0;
         }
         Fall();
@@ -56,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_isGrounded)
             return;
-        _rigidbody.velocity -= Vector2.up * (_fallIncreameant * Time.fixedDeltaTime);
+        _rigidbody.velocity -= Vector2.up * (_playerSettings.FallIncrement * Time.fixedDeltaTime);
     }
 
     private void CheckOnGround()
@@ -76,20 +93,48 @@ public class PlayerController : MonoBehaviour
     {
         _moveDirection = Input.GetAxis(Horizontal);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Hazard"))
+        {
+            OnPlayerDeath?.Invoke();
+        }
+        else if (other.CompareTag("Effect"))
+        {
+            var effectItem = other.GetComponent<EffectItem>();
+            OnPlayerCollectEffect?.Invoke(effectItem.EffectArgs);
+            Destroy(other.gameObject);
+        }
+    }
     
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Hazard"))
-    //     {
-    //         OnPlayerDeath?.Invoke();
-    //     }
-    //     else if (collision.gameObject.CompareTag("Effect"))
-    //     {
-    //         Effect effectToTake = new Effect();
-    //     }
-    //     else if (collision.gameObject.CompareTag("Blocker"))
-    //     {
-    //         // TODO
-    //     }
-    // }
+    public void ApplyEffect(EffectArgs args)
+    {
+        if (args is JetPackArgs jetPackArgs)
+        {
+            ApplyJetPack(jetPackArgs.Duration).Forget();
+        }
+    }
+
+    private async UniTaskVoid ApplyJetPack(float duration)
+    {
+        while (duration > 0 )
+        {
+            _playerSettings.FallIncrement = 0;
+            duration -= Time.deltaTime;
+            await UniTask.NextFrame();
+        }
+
+        _playerSettings.FallIncrement = _fallIncrement;
+    }
+
+    public void DisableEffect()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public class JetPackArgs : EffectArgs
+{
+    public float Duration;
 }

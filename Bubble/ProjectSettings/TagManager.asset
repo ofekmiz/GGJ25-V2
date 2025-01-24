@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Edge
   - Start
+  - Hazard
+  - Effect
   layers:
   - Default
   - TransparentFX
