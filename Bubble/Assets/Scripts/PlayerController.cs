@@ -91,7 +91,8 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void MoveControl()
     {
-        _moveDirection = Input.GetAxis(Horizontal);
+        _moveDirection = Input.GetAxisRaw(Horizontal);
+        transform.rotation = _moveDirection >= 0 ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, 180f, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
