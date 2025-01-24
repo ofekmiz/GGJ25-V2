@@ -15,10 +15,10 @@ namespace Domains.Core
         [SerializeField] BubbleFactory _bubbleFactory;
         [SerializeField] private Transform _bubblePoolParent;
 
-        [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private PlayerController _playerManager;
 
-        private List<PlatformerItem> _platformItems;
-        private EffectsManager _effectsManager;
+        // private List<PlatformerItem> _platformItems;
+        // private EffectsManager _effectsManager;
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
 
@@ -31,9 +31,9 @@ namespace Domains.Core
 
             _bubbleFactory.Init(this, _bubblePoolParent);
 
-            _platformItems = new List<PlatformerItem>();
-
-            _effectsManager = new EffectsManager(_dependencies);
+            // _platformItems = new List<PlatformerItem>();
+            //
+            // _effectsManager = new EffectsManager(_dependencies);
         }
 
         private void Start()
