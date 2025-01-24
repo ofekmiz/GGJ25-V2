@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Domains.Bubbles.BubbleSpawner;
 using Domains.Bubbles.Factories;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,28 +13,30 @@ namespace Domains.Core
     public class GameManager : MonoBehaviour
     {
         [Header("Bubble Pool")]
-        [SerializeField] BubbleFactory _bubbleFactory;
+        [SerializeField] private BubbleFactory _bubbleFactory;
+        [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
         [SerializeField] private PlayerController _playerManager;
 
-        // private List<PlatformerItem> _platformItems;
-        // private EffectsManager _effectsManager;
+        private Dependencies _dependencies;
+
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
-
-        private Dependencies _dependencies;
+        public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
 
         private void Awake()
         {
-            _dependencies.BubbleFactory = _bubbleFactory;
+            _dependencies = new()
+            {
+                GameManager = this,
+                BubbleFactory = _bubbleFactory,
+                BubblesManager = _bubblesManager,
+            };
 
             _bubbleFactory.Init(this, _bubblePoolParent);
-
-            // _platformItems = new List<PlatformerItem>();
-            //
-            // _effectsManager = new EffectsManager(_dependencies);
+            _bubblesManager.Init(this, BubbleFactory);
         }
 
         private void Start()

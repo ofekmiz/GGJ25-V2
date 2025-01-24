@@ -83,7 +83,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!61 &4834142109542278094
 BoxCollider2D:
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 8386650393690935474}
   - component: {fileID: 2769652750312403699}
   m_Layer: 0
-  m_Name: Platfrom
+  m_Name: Platfrom_ben
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
