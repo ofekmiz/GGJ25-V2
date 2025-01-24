@@ -8,6 +8,6 @@ public class RotationController : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal") * _speed));
+        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal2") * _speed));
     }
 }
