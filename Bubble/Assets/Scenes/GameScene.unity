@@ -720,6 +720,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Dream
       objectReference: {fileID: 0}
+    - target: {fileID: 5052982419867975579, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052982419867975579, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7541246202124109990, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
