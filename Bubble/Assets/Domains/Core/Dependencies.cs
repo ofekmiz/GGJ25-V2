@@ -1,20 +1,15 @@
+using System;
 using Domains.Bubbles.Factories;
 
 namespace Domains.Core
 {
 	public interface IConstructed
 	{
-		void Construct(IDependencies deps);
+		void Construct(in Dependencies d);
 	}
 
-	public interface IDependencies
+	public struct Dependencies
 	{
-		// add get only dependencies here
-		IBubbleFactory BubbleFactory { get; }
-	}
-
-	public class Dependencies : IDependencies
-	{
-		public IBubbleFactory BubbleFactory { get; set; }
+		public IBubbleFactory BubbleFactory;
 	}
 }

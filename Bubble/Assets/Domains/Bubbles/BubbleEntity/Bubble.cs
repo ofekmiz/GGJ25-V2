@@ -10,6 +10,6 @@ namespace Domains.Bubbles.BubbleEntity
 
     public class Bubble : MonoBehaviour, IBubble, IConstructed
     {
-        public void Construct(IDependencies deps) { }
+        public void Construct(in Dependencies deps) { }
     }
 }

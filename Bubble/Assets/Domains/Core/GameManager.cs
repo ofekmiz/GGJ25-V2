@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Domains.Bubbles.Factories;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace Domains.Core
@@ -14,13 +15,14 @@ namespace Domains.Core
         [SerializeField] private Transform _bubblePoolParent;
 
 
-        public Dependencies Deps = new Dependencies();
+        private Dependencies _dependencies;
 
 
         private void Awake()
         {
+            _dependencies.BubbleFactory = _bubbleFactory;
+
             _bubbleFactory.Init(this, _bubblePoolParent);
-            Deps.BubbleFactory = _bubbleFactory;
         }
 
         private void Start()
@@ -37,12 +39,28 @@ namespace Domains.Core
             }
         }
 
-        public T Spawn<T>(T prefab, Transform parent = null) where T : Object, IConstructed
-        {
-            var instance = parent ? Instantiate(prefab, parent) : Instantiate(prefab);
+        public T Spawn<T>(T original, Vector3 position, Quaternion rotation) where T : Object, IConstructed
+            => TryConstruct(Instantiate(original, position, rotation));
 
+        public T Spawn<T>(T original, Vector3 position, Quaternion rotation, Transform parent) where T : Object, IConstructed
+            => TryConstruct(Instantiate(original, position, rotation, parent));
+
+        public T Spawn<T>(T original) where T : Object, IConstructed
+            => TryConstruct(Instantiate(original));
+
+        public T Spawn<T>(T original, Scene scene) where T : Object, IConstructed
+            => TryConstruct((T)Instantiate(original, scene));
+
+        public T Spawn<T>(T original, Transform parent) where T : Object, IConstructed
+            => TryConstruct(Instantiate(original, parent));
+
+        public T Spawn<T>(T original, Transform parent, bool worldPositionStays) where T : Object, IConstructed
+            => TryConstruct(Instantiate(original, parent, worldPositionStays));
+
+        private T TryConstruct<T>(T instance) where T : Object, IConstructed
+        {
             if (instance)
-                instance.Construct(Deps);
+                instance.Construct(in _dependencies);
 
             return instance;
         }
