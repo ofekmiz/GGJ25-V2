@@ -36,8 +36,8 @@ public class BubblePhysics : MonoBehaviour
 
     private void FixedUpdate()
     {
-        accelerateBubble(Time.fixedDeltaTime);
-        applyCenterForce();
+        AccelerateBubble(Time.fixedDeltaTime);
+        ApplyCenterForce();
         ApplyNoiseForce();
 
         if (Vector3.Distance(_center.position, transform.position) > _radius)
@@ -119,10 +119,8 @@ public class BubblePhysics : MonoBehaviour
     {
         var noiseX = Mathf.PerlinNoise(transform.position.x + Time.time * _noiseSpeed, transform.position.y + Time.time * _noiseSpeed);
         var noiseY = Mathf.PerlinNoise(transform.position.x + Time.time * 2 * _noiseSpeed, transform.position.y + Time.time * 2 * _noiseSpeed);
-        _rb.AddForce(new Vector2(noiseX * _noiseFactor, noiseY * _noiseFactor));
+        Rb.AddForce(new Vector2(noiseX * _noiseFactor, noiseY * _noiseFactor));
     }
 
     public List<BubblePhysics> Connected => _connected;
-
-    public Rigidbody2D Rb => _rb;
 }
