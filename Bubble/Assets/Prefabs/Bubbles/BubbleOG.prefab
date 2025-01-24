@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5034400570856768786}
   - component: {fileID: 5172637409862609885}
   - component: {fileID: 3310852991131699833}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BubbleOG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,6 +166,7 @@ MonoBehaviour:
   _particleSystem: {fileID: 2145779238971489445}
   _startColor: {r: 0.57078433, g: 0.97222817, b: 0.9811321, a: 1}
   _endColor: {r: 0.084905505, g: 0.6169588, b: 1, a: 1}
+  _sprites: []
 --- !u!58 &3310852991131699833
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -210,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8246097928602306999}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BubbleContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +273,10 @@ PrefabInstance:
     - target: {fileID: 3466073678941295812, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}
       propertyPath: m_Name
       value: BubblesParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3466073678941295812, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3527657483269126628, guid: 7b31638ddd5044e8283f834dd1fbbe49, type: 3}
       propertyPath: m_LocalPosition.x

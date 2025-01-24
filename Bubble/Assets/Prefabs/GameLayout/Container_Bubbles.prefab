@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6328006583575383272}
   - component: {fileID: 7061380540426013961}
   - component: {fileID: 1494041354431534977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Colider_Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4308163762978557196}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4126285812494701859}
   - component: {fileID: 2253329708394363882}
   - component: {fileID: 8885672441008193605}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider_Circle_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5272456347245354174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spawn Point 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 3258477083115008051}
   - component: {fileID: 5805551078582435409}
   - component: {fileID: 8559672731487604310}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Container_Bubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3284395570406754445}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8922205113452058576}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spawn Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,12 +463,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 3258477083115008051}
     m_Modifications:
     - target: {fileID: 1170585927118761203, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1170585927118761203, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2207860338909773350, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207860338909773350, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819825282568117716, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3819825282568117716, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: m_IsActive
@@ -502,9 +514,21 @@ PrefabInstance:
       propertyPath: _spawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 5272456347245354174}
+    - target: {fileID: 6901505073678085663, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6908202857792663597, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: m_Name
       value: Bubbles Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 6908202857792663597, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034735461554451961, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7034735461554451961, guid: ff4f457ca9b6333478ab7584745330cf, type: 3}
       propertyPath: m_IsActive
@@ -596,9 +620,25 @@ PrefabInstance:
       propertyPath: _bubbleTravelDistance
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1456288018068557469, guid: 00dc31a237a7ca14889e964476345817, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973751485814359593, guid: 00dc31a237a7ca14889e964476345817, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320617796925126731, guid: 00dc31a237a7ca14889e964476345817, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7390648893486371682, guid: 00dc31a237a7ca14889e964476345817, type: 3}
       propertyPath: m_Name
       value: Bubbles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390648893486371682, guid: 00dc31a237a7ca14889e964476345817, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7390648893486371682, guid: 00dc31a237a7ca14889e964476345817, type: 3}
       propertyPath: m_IsActive
