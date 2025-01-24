@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 8386650393690935474}
   - component: {fileID: 2769652750312403699}
   m_Layer: 0
-  m_Name: Platfrom_ben
+  m_Name: Platfrom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
