@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8386650393690935474, guid: 04db9b4ad5fa542f99befb8a2f12828f, type: 3}
+      propertyPath: _dontHidePlatform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8417929345350907562, guid: 04db9b4ad5fa542f99befb8a2f12828f, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 12
