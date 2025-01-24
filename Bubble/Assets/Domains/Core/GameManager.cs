@@ -15,6 +15,8 @@ namespace Domains.Core
         [SerializeField] private Transform _bubblePoolParent;
 
 
+        public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
+
         private Dependencies _dependencies;
 
 

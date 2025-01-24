@@ -20,7 +20,7 @@ namespace Domains.Bubbles.BubbleSpawner
 		[SerializeField] [Range(1f, 10f)] private float _bubbleFloatSpeed = 0.5f;
 		[SerializeField] [Range(1f, 10f)] private float _bubbleTravelDistance = 0.5f;
 
-		private IBubbleFactory BubbleFactory => _gm.Deps.BubbleFactory;
+		private IBubbleFactory BubbleFactory => _gm.BubbleFactory;
 		private readonly List<Bubble> _bubbles = new();
 
 		private void Awake()
