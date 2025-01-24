@@ -1,3 +1,4 @@
+using Domains.Core;
 using UnityEngine;
 
 namespace Domains.Bubbles.BubbleEntity
@@ -7,18 +8,8 @@ namespace Domains.Bubbles.BubbleEntity
     {
     }
 
-    public class Bubble : MonoBehaviour, IBubble
+    public class Bubble : MonoBehaviour, IBubble, IConstructed
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public void Construct(IDependencies deps) { }
     }
 }
