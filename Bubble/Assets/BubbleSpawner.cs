@@ -30,6 +30,8 @@ public class BubbleSpawner : MonoBehaviour
 
     public static BubbleSpawner Instance { get; private set; }
 
+    private GameModifiersManager _gameModifiersManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -43,6 +45,11 @@ public class BubbleSpawner : MonoBehaviour
             SpawnRandom();
             UniTask.Delay(_delayBetweenBubbles);
         }
+    }
+
+    public void Init(GameModifiersManager gameModifiersManager)
+    {
+        _gameModifiersManager = gameModifiersManager;
     }
 
     private void StartSpawn()
@@ -65,6 +72,8 @@ public class BubbleSpawner : MonoBehaviour
     private void Spawn(Vector2 pos)
     {
         var bubble = Instantiate(_bubblePrefab, this.transform);
+        ModifierBubble modifierBubble = bubble.GetComponent<ModifierBubble>();
+        modifierBubble.Set(_gameModifiersManager.GetRandomModifier());
         bubble.SetCenter(_center, _radius);
         _bubbles.Add(bubble);
         bubble.transform.position = pos;

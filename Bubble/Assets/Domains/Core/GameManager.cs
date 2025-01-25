@@ -18,12 +18,20 @@ namespace Domains.Core
 
         [SerializeField] private PlayerController _playerManager;
 
+        [SerializeField] private BubbleSpawner _bubbleSpawner;
+        [SerializeField] private GameModifiersManager _gameModifiersManager;
+        
         private Dependencies _dependencies;
 
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
         public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
+
+        private void Awake()
+        {
+            _bubbleSpawner.Init(_gameModifiersManager); //TODO::move to init later
+        }
 
         public void Init()
         {

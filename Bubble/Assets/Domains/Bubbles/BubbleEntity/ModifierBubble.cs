@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class ModifierBubble : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private SpriteRenderer _icon;
+    public void Set(GameModifier gameModifier)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _icon.sprite = gameModifier.Icon;
     }
 }

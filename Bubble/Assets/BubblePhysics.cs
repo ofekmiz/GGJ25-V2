@@ -138,6 +138,6 @@ public class BubblePhysics : MonoBehaviour
         var noiseY = Mathf.PerlinNoise(transform.position.x + Time.time * 2 * _noiseSpeed, transform.position.y + Time.time * 2 * _noiseSpeed);
         Rb.AddForce(new Vector2(noiseX * _noiseFactor, noiseY * _noiseFactor));
     }
-
+    
     public List<BubblePhysics> Connected => _connected;
 }
