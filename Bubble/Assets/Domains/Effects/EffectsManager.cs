@@ -22,27 +22,27 @@ public class EffectsManager
         _effectables[key] = effectables;
     }
 
-    public void PlayEffect(GameModifierType modifierType)
+    public void PlayEffect(GameModifier modifier)
     {
-        if (!_effectables.TryGetValue(modifierType, out var effectables))
+        if (!_effectables.TryGetValue(modifier.Type, out var effectables))
         {
-            Debug.LogError($"Tried to play effect {modifierType} but it doesn't exist");
+            Debug.LogError($"Tried to play effect {modifier} but it doesn't exist");
             return;
         }
 
         foreach (var effectable in effectables)
-            effectable.ApplyEffect(modifierType);
+            effectable.ApplyEffect(modifier);
     }
     
-    public void DisableEffect(GameModifierType effectType)
-    {
-        if (!_effectables.TryGetValue(effectType, out var effectables))
-        {
-            Debug.LogError($"Tried to disable effect {effectType} but it doesn't exist");
-            return;
-        }
-        
-        foreach (var effectable in effectables)
-            effectable.ApplyEffect(effectType);
-    }
+    // public void DisableEffect(GameModifierType effectType)
+    // {
+    //     if (!_effectables.TryGetValue(effectType, out var effectables))
+    //     {
+    //         Debug.LogError($"Tried to disable effect {effectType} but it doesn't exist");
+    //         return;
+    //     }
+    //     
+    //     foreach (var effectable in effectables)
+    //         effectable.(effectType);
+    // }
 }

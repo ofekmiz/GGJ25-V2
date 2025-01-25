@@ -187,6 +187,11 @@ MonoBehaviour:
   _moveRate: 5
   _distance: 5
   _maxMinHeight: {x: 0, y: 4}
+  _speedIncrement: 0.5
+  _intervals: 3
+  _enemyPrefab: {fileID: -4505513650456162589, guid: b6c287ebf5ea1470593216337bd9c39d, type: 3}
+  _enemyMaxMinHeight: {x: 3, y: 8}
+  _shortState: 0.5
 --- !u!1 &3936323867582686678
 GameObject:
   m_ObjectHideFlags: 0

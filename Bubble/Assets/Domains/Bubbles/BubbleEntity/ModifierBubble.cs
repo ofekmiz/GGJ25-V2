@@ -9,17 +9,14 @@ public class ModifierBubble : MonoBehaviour
     [SerializeField] private List<Sprite> _sprites;
     [SerializeField] private List<Sprite> _badSprites;
     [SerializeField] private SpriteRenderer _bubbleSprite;
-    
-    private GameModifier _modifier;
+    public GameModifier Modifier {get; private set;}
     
     public void Set(GameModifier gameModifier)
     {
-        _modifier = gameModifier;
+        Modifier = gameModifier;
         _icon.sprite = gameModifier.Icon;
         
         var randSprite = gameModifier.Good ? _sprites[Random.Range(0, _sprites.Count)] : _badSprites[Random.Range(0, _badSprites.Count)];
         _bubbleSprite.sprite = randSprite;
     }
-    
-    public GameModifierType ModifierType => _modifier.Type;
 }

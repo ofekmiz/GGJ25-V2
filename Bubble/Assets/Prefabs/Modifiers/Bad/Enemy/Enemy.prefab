@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2412629604720435258}
   - component: {fileID: 7284855265041242864}
+  - component: {fileID: -4505513650456162589}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,6 +69,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &-4505513650456162589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4670996700317748366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4eab4b0d6741cc8e77cafa988b2177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5763053992727885221
 GameObject:
   m_ObjectHideFlags: 0
