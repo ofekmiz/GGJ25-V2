@@ -142,11 +142,11 @@ public class PlayerController : MonoBehaviour , IEffectable
         
         switch (modifierType)
         {
-            case GameModifierType.Jump: applyJumpModifier(); break;
+            case GameModifierType.Jump: ApplyJumpModifier(); break;
         }
     }
 
-    private void applyJumpModifier()
+    private void ApplyJumpModifier()
     {
         _playerSettings.JumpForce += 2;
     }
