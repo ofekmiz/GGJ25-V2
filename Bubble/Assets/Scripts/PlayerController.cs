@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PlayerController : MonoBehaviour , IEffectable
@@ -11,6 +13,7 @@ public class PlayerController : MonoBehaviour , IEffectable
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _fallIncrement = 10;
+    [SerializeField] private List<Utils.SpawnPoint> _spawnPoints;
     
     public static Action OnPlayerDeath;
     public static Action<EffectArgs> OnPlayerCollectEffect;
@@ -131,7 +134,19 @@ public class PlayerController : MonoBehaviour , IEffectable
             case GameModifierType.Goggles: //show goggles on player
                 break;
         }
-        
+
+        Spawn(modifier);
+    }
+
+    private void Spawn(GameModifier modifier)
+    {
+        if(!modifier.Prefab)
+            return;
+        var spawnPointIndex = _spawnPoints.FindIndex(p => p.Key == modifier.Type);
+        if(spawnPointIndex < 0)
+            return;
+        var spawnPoint = _spawnPoints[spawnPointIndex];
+        Instantiate(modifier.Prefab, spawnPoint.Parent);
     }
 
     private void ApplyJetPack(float duration)

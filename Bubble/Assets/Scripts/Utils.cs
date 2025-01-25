@@ -6,6 +6,13 @@ using UnityEngine;
 
 public static class Utils
 {
+	[Serializable]
+	public struct SpawnPoint
+	{
+		public GameModifierType Key;
+		public Transform Parent;
+	}
+	
 	public static async UniTaskVoid RunTimer(float duration, Action onEnd)
 	{
 		if (duration == 0)
