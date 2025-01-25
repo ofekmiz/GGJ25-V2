@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -25,6 +26,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
     public static float PlatformHideLocation { get; private set; }
     private float _position;
     private float _timer;
+    private float _movingSpeed;
     private int _platformCount;
     private Platform _startPlatformInstance;
     
@@ -50,6 +52,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
             t => t.gameObject.SetActive(true),
             t => t.gameObject.SetActive(false));
         GenerateMap();
+        _movingSpeed = _moveRate;
     }
     private void Update()
     {
@@ -63,14 +66,14 @@ public class PlatformMover : MonoBehaviour, IEffectable
         _timer += Time.deltaTime;
         if (_timer < _intervals) 
             return;
-        _moveRate += _speedIncrement;
+        _movingSpeed += _speedIncrement;
         _timer = 0;
     }
 
     private void MovePlayerOnPlatforms()
     {
         if(_playerMove is {IsGrounded: true})
-            _playerMove.Rigidbody.position += new Vector2(-_moveRate * Time.deltaTime, 0);
+            _playerMove.Rigidbody.position += new Vector2(-_movingSpeed * Time.deltaTime, 0);
     }
 
     private void GenerateMap()
@@ -125,7 +128,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
 
     private void MovePlatform()
     {
-        _container.position += new Vector3(-_moveRate * Time.deltaTime, 0, 0);
+        _container.position += new Vector3(-_movingSpeed * Time.deltaTime, 0, 0);
     }
 
     public void ApplyEffect(GameModifier modifier)
@@ -135,8 +138,15 @@ public class PlatformMover : MonoBehaviour, IEffectable
             case GameModifierType.BreakablePlatforms: ApplyBreakablePlatform(5); break;
             case GameModifierType.ShortPlatforms: ApplyModifierPlatforms(5, PlatformState.Short); break;
             case GameModifierType.LongPlatforms: ApplyModifierPlatforms(5, PlatformState.Long); break;
+            case GameModifierType.Slow: SlowSpeed(); break;
             case GameModifierType.Enemy: GenerateEnemy(modifier.Prefab); break;
         }
+    }
+
+    private void SlowSpeed()
+    {
+        var endValue =Mathf.Max(_moveRate, _movingSpeed - (_speedIncrement * 3)); 
+        DOTween.To(() => _movingSpeed, value => _movingSpeed = value, endValue, 1);
     }
 
     private void GenerateEnemy(GameObject enemyVisual)

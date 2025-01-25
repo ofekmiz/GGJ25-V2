@@ -128,6 +128,30 @@ namespace Domains.Core
                     .Where(m => m.Type == GameModifierType.Enemy)
                     .GetRandom());
             }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.Slow
+                });
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.Shield
+                });
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.Random
+                });
+            }
         }
 
         private async UniTaskVoid RunTimer()

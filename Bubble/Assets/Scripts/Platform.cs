@@ -86,16 +86,19 @@ public class Platform : MonoBehaviour
 	
 	private async UniTaskVoid Show()
 	{
+		if(IsShown)
+			return;
 		IsShown = true;
 		var width = _collider.size.x;
 		if (Settings.State == PlatformState.Short)
 			width *= Settings.ShortValue;
-		if (Settings.State == PlatformState.Long)
+		else if (Settings.State == PlatformState.Long)
 			width *= (1 - Settings.ShortValue);
 			
 		var size = _collider.size;
 		size.x = width;
 		_collider.size = size;
+		Debug.Log(_collider.size);
 		foreach (var visual in _visuals)
 		{
 			size = visual.size;

@@ -14,18 +14,16 @@ public class GameModifier
 
 public enum GameModifierType
 {
-    FireExtinguisher,
     Goggles,
     Hat,
     Jump,
     JetPack,
-    Pistol,
-    RubberFloat,
-    Sword,
     BreakablePlatforms,
     ShortPlatforms,
     LongPlatforms,
     Enemy,
     Shield,
+    Slow,
+    Background,
     Random
 }
