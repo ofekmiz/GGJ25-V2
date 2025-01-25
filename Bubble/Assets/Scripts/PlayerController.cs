@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour , IEffectable
             {
                 Destroy(other.gameObject);
                 Destroy(_shield);
-                Utils.RunTimer(0.1f, () => _playerSettings.HasShield = false).Forget(); 
+                Utils.RunTimer(0.3f, () => _playerSettings.HasShield = false).Forget(); 
                 return;
             }
             OnPlayerDeath?.Invoke();
