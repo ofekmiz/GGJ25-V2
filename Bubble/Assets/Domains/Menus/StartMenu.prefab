@@ -119,6 +119,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startBtn: {fileID: 436950836773654001}
+  _gm: {fileID: 0}
+  _canvasGroup: {fileID: 0}
+  _fadeDuration: 1
+  _fadeEase: 7
 --- !u!1 &749969315998261863
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +5151,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 88
   m_TargetDisplay: 0
 --- !u!114 &3657000113946616819
 MonoBehaviour:
@@ -5335,7 +5339,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 90
   m_TargetDisplay: 0
 --- !u!114 &3231688025732847820
 MonoBehaviour:
@@ -5459,6 +5463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1793893005211460250}
+  - component: {fileID: 1154264082924627060}
   m_Layer: 0
   m_Name: StartMenu
   m_TagString: Untagged
@@ -5483,3 +5488,15 @@ Transform:
   - {fileID: 121452160392348374}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &1154264082924627060
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317454721607375023}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
