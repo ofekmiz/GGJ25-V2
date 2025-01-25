@@ -28,6 +28,9 @@ public class WobbleBobble : MonoBehaviour
     private void Update()
     {
         float dt = Time.deltaTime;
+        if (dt == 0)
+            return;
+        
         Vector2 velocity = _rb.velocity;
         
         Vector2 acceleration = (velocity - _prevVelocity) / dt;

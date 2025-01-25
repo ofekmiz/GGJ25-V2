@@ -673,6 +673,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3385cae0bd00b4736947867981be0a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &2111815284960044002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913914949403997811, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4219675599608814550, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_Name
+      value: FTUEScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4219675599608814550, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
 --- !u!1001 &2607121191388399378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -901,3 +962,4 @@ SceneRoots:
   - {fileID: 1581034394}
   - {fileID: 8465438915656084932}
   - {fileID: 1758933359}
+  - {fileID: 2111815284960044002}
