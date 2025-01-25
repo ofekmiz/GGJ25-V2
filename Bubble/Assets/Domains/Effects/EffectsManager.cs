@@ -26,7 +26,7 @@ public class EffectsManager
     {
         if (!_effectables.TryGetValue(modifier.Type, out var effectables))
         {
-            Debug.LogError($"Tried to play effect {modifier} but it doesn't exist");
+            Debug.LogError($"Tried to play effect {modifier.Type} but it doesn't exist");
             return;
         }
 
