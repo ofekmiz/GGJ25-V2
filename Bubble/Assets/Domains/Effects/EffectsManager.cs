@@ -5,36 +5,44 @@ using UnityEngine;
 
 public class EffectsManager
 {
-    private static Dictionary<string,IEffectable> _effectables = new();
+    private static Dictionary<GameModifierType,List<IEffectable>> _effectables = new();
 
-    public static void Subscribe(string key, IEffectable effectable)
+    public static void Subscribe(GameModifierType key, IEffectable effectable)
     {
-        _effectables.Add(key, effectable);
+        if(!_effectables.ContainsKey(key))
+            _effectables.Add(key, new());
+        _effectables[key].Add(effectable);
     }
     
-    public static void Unsubscribe(string key)
+    public static void Unsubscribe(GameModifierType key, IEffectable effectable)
     {
-        _effectables.Remove(key);
+        if(!_effectables.TryGetValue(key, out var effectables))
+            return;
+        effectables.Remove(effectable);
+        _effectables[key] = effectables;
     }
 
-    public void PlayEffect(EffectArgs args)
+    public void PlayEffect(GameModifierType modifierType)
     {
-        if (!_effectables.TryGetValue(args.Type, out var effectable))
+        if (!_effectables.TryGetValue(modifierType, out var effectables))
         {
-            Debug.LogError($"Tried to play effect {args.Type} but it doesn't exist");
+            Debug.LogError($"Tried to play effect {modifierType} but it doesn't exist");
             return;
         }
-        effectable.ApplyEffect(args);
+
+        foreach (var effectable in effectables)
+            effectable.ApplyEffect(modifierType);
     }
     
-    public void DisableEffect(string effectType)
+    public void DisableEffect(GameModifierType effectType)
     {
-        if (!_effectables.TryGetValue(effectType, out var effectable))
+        if (!_effectables.TryGetValue(effectType, out var effectables))
         {
             Debug.LogError($"Tried to disable effect {effectType} but it doesn't exist");
             return;
         }
         
-        effectable.DisableEffect();
+        foreach (var effectable in effectables)
+            effectable.ApplyEffect(effectType);
     }
 }

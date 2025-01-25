@@ -16,6 +16,7 @@ public enum GameModifierType
     Goggles,
     Hat,
     Jump,
+    JetPack,
     Pistol,
     RubberFloat,
     Sword,
