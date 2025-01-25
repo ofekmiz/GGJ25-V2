@@ -131,18 +131,16 @@ namespace Domains.Core
             
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                _effectsManager.PlayEffect(new()
-                {
-                    Type = GameModifierType.JetPack
-                });
+                _effectsManager.PlayEffect(_gameModifiersManager.GameModifiers
+                    .Where(m => m.Type == GameModifierType.JetPack)
+                    .GetRandom());
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                _effectsManager.PlayEffect(new()
-                {
-                    Type = GameModifierType.Jump
-                });
+                _effectsManager.PlayEffect(_gameModifiersManager.GameModifiers
+                    .Where(m => m.Type == GameModifierType.Jump)
+                    .GetRandom());
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -162,10 +160,9 @@ namespace Domains.Core
             
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                _effectsManager.PlayEffect(new()
-                {
-                    Type = GameModifierType.Shield
-                });
+                _effectsManager.PlayEffect(_gameModifiersManager.GameModifiers
+                    .Where(m => m.Type == GameModifierType.Shield)
+                    .GetRandom());
             }
             
             if (Input.GetKeyDown(KeyCode.Alpha8))

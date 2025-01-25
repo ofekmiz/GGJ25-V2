@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour , IEffectable
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _fallIncrement = 10;
     [SerializeField] private List<Utils.SpawnPoint> _spawnPoints;
+
+    [SerializeField] private Animator _animator;
     
     public static Action OnPlayerDeath;
     private bool _alive = true;
@@ -110,6 +112,17 @@ public class PlayerController : MonoBehaviour , IEffectable
         if (!_alive) return;
         _moveDirection = Input.GetAxisRaw(Horizontal);
         transform.rotation = _moveDirection >= 0 ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, 180f, 0f);
+
+        if(!_animator)
+            return;
+        if (_moveDirection != 0)
+        {
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -150,8 +163,8 @@ public class PlayerController : MonoBehaviour , IEffectable
     {
         switch (modifier.Type)
         {
-            case GameModifierType.Jump: ApplyJumpModifier(3); break; 
-            case GameModifierType.JetPack: ApplyJetPack(3); break;
+            case GameModifierType.Jump: ApplyJumpModifier(modifier, 3); return; 
+            case GameModifierType.JetPack: ApplyJetPack(modifier,3); return;
             case GameModifierType.Shield: AddShied(modifier); return;
         }
 
@@ -175,19 +188,31 @@ public class PlayerController : MonoBehaviour , IEffectable
         return Instantiate(modifier.Prefab, spawnPoint.Parent);
     }
 
-    private void ApplyJetPack(float duration)
+    private void ApplyJetPack(GameModifier modifier, float duration)
     {
         Debug.Log("Player got Jet Pack!");
         _playerSettings.FallIncrement = 0;
-        Utils.RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
+        var instance = Spawn(modifier);
+        Utils.RunTimer(duration, () =>
+        {
+            _playerSettings.FallIncrement = _fallIncrement;
+            if(instance)
+                Destroy(instance);
+        }).Forget();
     }
     
 
-    private void ApplyJumpModifier(float duration)
+    private void ApplyJumpModifier(GameModifier modifier, float duration)
     {
         Debug.Log("Player got Jump Modifier!");
         _playerSettings.JumpForce += 2;
-        Utils.RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
+        var instance = Spawn(modifier);
+        Utils.RunTimer(duration, () =>
+        {
+            _playerSettings.JumpForce -= 2f;
+            if(instance)
+                Destroy(instance);
+        }).Forget();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
