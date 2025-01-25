@@ -89,6 +89,12 @@ public class PlayerController : MonoBehaviour , IEffectable
         {
             _jumpDirection = _jumpForce;
         }
+        
+        if (Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.W))
+        {
+            if (_rigidbody.velocity.y > 0)
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y / 2f);
+        }
     }
 
     private void MoveControl()

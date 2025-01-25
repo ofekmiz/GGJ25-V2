@@ -51,6 +51,7 @@ public class Shooter : MonoBehaviour
 
     private void shootGoodBullet()
     {
+        //AudioManager.Instance.PlayGameAudio("CollectingShoot");
         _currentShotInterval = Mathf.Lerp(startShootInterval, endShootInterval, _playTime / gameTime);
         _timeToNextShot = _currentShotInterval;
 
@@ -60,6 +61,7 @@ public class Shooter : MonoBehaviour
     
     private void shootDestroyingBullet()
     {
+        //AudioManager.Instance.PlayGameAudio("DestroyingShoot");
         DestroyingBullet destroyingBullet = Instantiate(_destroyingBulletPrefab);
         destroyingBullet.transform.position = _spawnPoint.position;
     }

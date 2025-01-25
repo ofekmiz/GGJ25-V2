@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     private int _currentAudioSourceIdx = 0;
     
     private AudioPlayer _bgAudioPlayer;
+
+    public static AudioManager Instance;
     
     public struct AudioSourceData
     {
@@ -33,6 +35,11 @@ public class AudioManager : MonoBehaviour
         public float Pitch;
         public float RandomPitch;
         [Range(0f, 1f)] public float Volume;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     public void Init()
@@ -109,7 +116,7 @@ public class AudioManager : MonoBehaviour
         else
             audioSource.clip = audioData.Clips[Random.Range(0, audioData.Clips.Count)];
             
-        audioSource.pitch = 1;
+        audioSource.pitch = audioData.Pitch == 0 ? 1 : audioData.Pitch;
         if (audioData.RandomPitch > 0)
         {
             float randomPitch = Random.Range(-audioData.RandomPitch, audioData.RandomPitch);

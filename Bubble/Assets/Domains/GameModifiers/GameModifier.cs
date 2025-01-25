@@ -8,6 +8,7 @@ public class GameModifier
 {
     public GameModifierType Type;
     public Sprite Icon;
+    public bool Good = true;
 }
 
 public enum GameModifierType

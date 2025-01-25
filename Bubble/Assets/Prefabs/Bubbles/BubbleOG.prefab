@@ -154,19 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28066ec798db26a43a290b7b29d44d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 0}
-  _startColor: {r: 0.57078433, g: 0.97222817, b: 0.9811321, a: 1}
-  _endColor: {r: 0.084905505, g: 0.6169588, b: 1, a: 1}
-  _sprites:
-  - {fileID: 21300000, guid: 142677f018b0d46208a742b35f69ed2f, type: 3}
-  - {fileID: 21300000, guid: a45f137a691cf4efda511a56bb34ce16, type: 3}
-  - {fileID: 21300000, guid: 0a43d712bb6524886b726e263b1339f6, type: 3}
-  - {fileID: 21300000, guid: b4ef35f98a8e943e2aa29c828c43333b, type: 3}
-  - {fileID: 21300000, guid: 11f0d945a4e4a42b58ac5018b027e9af, type: 3}
-  - {fileID: 21300000, guid: f57b44d85291241778c8da4713b5e748, type: 3}
-  - {fileID: 21300000, guid: 281d85431fa23405e82112edcfee589b, type: 3}
-  - {fileID: 21300000, guid: c36d981f5d44342ad951f0145930e72c, type: 3}
-  _bubbleSprite: {fileID: 7285256816361300122}
 --- !u!114 &4925420548970189495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +167,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 6554163605387073497}
+  _sprites:
+  - {fileID: 21300000, guid: 142677f018b0d46208a742b35f69ed2f, type: 3}
+  - {fileID: 21300000, guid: a45f137a691cf4efda511a56bb34ce16, type: 3}
+  - {fileID: 21300000, guid: 0a43d712bb6524886b726e263b1339f6, type: 3}
+  - {fileID: 21300000, guid: b4ef35f98a8e943e2aa29c828c43333b, type: 3}
+  - {fileID: 21300000, guid: 11f0d945a4e4a42b58ac5018b027e9af, type: 3}
+  - {fileID: 21300000, guid: f57b44d85291241778c8da4713b5e748, type: 3}
+  - {fileID: 21300000, guid: 281d85431fa23405e82112edcfee589b, type: 3}
+  - {fileID: 21300000, guid: c36d981f5d44342ad951f0145930e72c, type: 3}
+  _badSprites:
+  - {fileID: 21300000, guid: 142677f018b0d46208a742b35f69ed2f, type: 3}
+  - {fileID: 21300000, guid: a45f137a691cf4efda511a56bb34ce16, type: 3}
+  - {fileID: 21300000, guid: 0a43d712bb6524886b726e263b1339f6, type: 3}
+  - {fileID: 21300000, guid: b4ef35f98a8e943e2aa29c828c43333b, type: 3}
+  - {fileID: 21300000, guid: 11f0d945a4e4a42b58ac5018b027e9af, type: 3}
+  - {fileID: 21300000, guid: f57b44d85291241778c8da4713b5e748, type: 3}
+  - {fileID: 21300000, guid: 281d85431fa23405e82112edcfee589b, type: 3}
+  - {fileID: 21300000, guid: c36d981f5d44342ad951f0145930e72c, type: 3}
+  _bubbleSprite: {fileID: 7285256816361300122}
 --- !u!58 &3310852991131699833
 CircleCollider2D:
   m_ObjectHideFlags: 0
