@@ -34,8 +34,8 @@ public class BubbleSpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+        //if (Instance == null)
+        Instance = this;
     }
 
     public void BeginsSpawn()
@@ -49,7 +49,7 @@ public class BubbleSpawner : MonoBehaviour
     
     public void DestoryAllBubbles()
     {
-        for (int i = 0; i < _startingBubbles; i++)
+        for (int i = 0; i < _bubbles.Count; i++)
         {
             if(_bubbles[i])
                 Destroy(_bubbles[i].gameObject);
@@ -93,6 +93,6 @@ public class BubbleSpawner : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.LogError("Destroyed!");
+        Debug.Log("Destroyed!");
     }
 }
