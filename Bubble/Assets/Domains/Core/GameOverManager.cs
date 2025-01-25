@@ -8,13 +8,16 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private SpriteRenderer _skySprite;
     [SerializeField] private SpriteRenderer _groundSprite;
 
+    [SerializeField] private GameOverScreen _gameOverScreen;
+
     private void Awake()
     {
-        OnGameOver();
+        //OnGameOver();
     }
 
-    public void OnGameOver()
+    public void OnGameOver(int score)
     {
-        _skySprite.material.DOColor(Color.grey, 5f);
+        //_skySprite.material.DOColor(Color.grey, 5f);
+        _gameOverScreen.SetScore(score);
     }
 }
