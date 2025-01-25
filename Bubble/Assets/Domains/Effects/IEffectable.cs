@@ -8,7 +8,7 @@ public class EffectArgs
 
 public interface IEffectable
 {
-	void ApplyEffect(GameModifierType type);
+	void ApplyEffect(GameModifier type);
 }
 
 

@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         _rigidbody.position += new Vector2(_moveDirection * _playerSettings.MoveSpeed * Time.fixedDeltaTime, 0f);
         if (_jumpDirection > 0)
         {
+            AudioManager.Instance.PlayGameAudio("SheepJump");
             _rigidbody.velocity = Vector2.up * _playerSettings.JumpForce;
             _jumpDirection = 0;
         }
@@ -117,9 +118,9 @@ public class PlayerController : MonoBehaviour , IEffectable
         }
     }
     
-    public void ApplyEffect(GameModifierType type)
+    public void ApplyEffect(GameModifier modifier)
     {
-        switch (type)
+        switch (modifier.Type)
         {
             case GameModifierType.Jump: 
                 ApplyJumpModifier(3); 

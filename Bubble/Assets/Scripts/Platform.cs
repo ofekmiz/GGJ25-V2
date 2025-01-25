@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine;
 public struct PlatformInitArgs
 {
 	public Vector3 Position;
+	public float ShortValue;
 	public bool ShowOnStart;
 	public bool Breakable;
 	public bool Short;
@@ -20,6 +22,8 @@ public class Platform : MonoBehaviour
 	public static Action<PlayerController> OnPlayerGround;
 	[SerializeField] private bool _dontHidePlatform;
 	[SerializeField] private Transform _view;
+	[SerializeField] private BoxCollider2D _collider;
+	[SerializeField] private List<SpriteRenderer> _visuals;
 
 	public PlatformInitArgs Settings;
 	public bool IsShown { get; private set; }
@@ -78,7 +82,15 @@ public class Platform : MonoBehaviour
 		IsShown = true;
 		if (Settings.Short)
 		{
-			
+			var size = _collider.size;
+			size.x *= Settings.ShortValue;
+			_collider.size = size;
+			foreach (var visual in _visuals)
+			{
+				size = visual.size;
+				size *= Settings.ShortValue;
+				visual.size = size;
+			}
 		}
 		await transform.DOLocalMoveY(Settings.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 	}

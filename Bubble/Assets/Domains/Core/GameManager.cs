@@ -76,7 +76,7 @@ namespace Domains.Core
             _gameOverManager.OnGameOver();
         }
 
-        public void GameModifierCollected(GameModifierType modifierType)
+        public void GameModifierCollected(GameModifier modifierType)
         {
             _effectsManager.PlayEffect(modifierType);
         }
@@ -90,9 +90,20 @@ namespace Domains.Core
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
-                _effectsManager.PlayEffect(GameModifierType.BreakablePlatforms);
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.BreakablePlatforms
+                });
+            }
+
             if (Input.GetKeyDown(KeyCode.Alpha2))
-                _effectsManager.PlayEffect(GameModifierType.ShortPlatforms);
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.ShortPlatforms
+                });
+            }
         }
 
         private async UniTaskVoid RunTimer()
