@@ -76,6 +76,7 @@ namespace Domains.Core
             _isGameOver = true;
             _gameOverScreen.gameObject.SetActive(true);
             _gameOverScreen.SetScore(int.Parse(_timer.text));
+            _audioManager.PlayGameAudio("Loose");
         }
 
         public void GameModifierCollected(GameModifier modifierType)
