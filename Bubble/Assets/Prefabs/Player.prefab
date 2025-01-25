@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _jumpForce: 18
+  _jumpForce: 22.5
   _trampolineJumpForce: 25
   _rigidbody: {fileID: 3757283475958145802}
   _groundCheckRadius: 0.1
@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1871979809395531338, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1871979809395531338, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingLayerID
@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6431544282127989777, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6431544282127989777, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingLayerID
@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7750930670882780592, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7750930670882780592, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingLayerID
@@ -559,7 +559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325224210517939410, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8325224210517939410, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingLayerID
