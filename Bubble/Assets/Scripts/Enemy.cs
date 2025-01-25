@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
 	public void SetView(GameObject prefab)
 	{
-		Instantiate(prefab, transform);
+		if(prefab)
+			Instantiate(prefab, transform);
 	}
 }

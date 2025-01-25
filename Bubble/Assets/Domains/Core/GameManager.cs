@@ -18,19 +18,25 @@ namespace Domains.Core
         [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
+        [SerializeField] private GameObject _scroller;
+        [SerializeField] private Vector3 _scrollerStartPos;
+
         //[SerializeField] private PlayerController _playerController;
         [SerializeField] private TMP_Text _timer;
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
         [SerializeField] private GameOverScreen _gameOverScreen;
+        [SerializeField] private GameObject _startMenu;
         
         [SerializeField] private AudioManager _audioManager;
+
 
         private bool _isGameOver = false;
         
         private Dependencies _dependencies;
         private float _timeInterval = 0.5f;
+        private float _counter = 0f;
         public int GameTimer { get; private set; }
         private EffectsManager _effectsManager;
 
@@ -38,7 +44,7 @@ namespace Domains.Core
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
         public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
-        public static GameManager Instance; //Sorry not sorry
+        public static GameManager Instance; //Sorry not sorry // D:
 
 
         private void Awake()
@@ -48,10 +54,13 @@ namespace Domains.Core
             
             //TODO::move to init later
             _bubbleSpawner.Init(_gameModifiersManager);
+            _bubbleSpawner.BeginsSpawn();
             _audioManager.Init();
             _audioManager.PlayBgAudio();
 
             PlayerController.OnPlayerDeath += OnGameOver;
+
+            _scrollerStartPos = _scroller.transform.position;
         }
 
         public void Init()
@@ -76,11 +85,24 @@ namespace Domains.Core
             _isGameOver = true;
             _gameOverScreen.gameObject.SetActive(true);
             _gameOverScreen.SetScore(int.Parse(_timer.text));
+            _bubbleSpawner.DestoryAllBubbles();
+			_audioManager.PlayGameAudio("Loose");
         }
 
         public void GameModifierCollected(GameModifier modifierType)
         {
             _effectsManager.PlayEffect(modifierType);
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("GameScene");
+            _startMenu?.gameObject.SetActive(false);
+            //_isGameOver = false;
+            //_counter = 0f;
+            //_bubbleSpawner.BeginsSpawn();
+            //_gameOverScreen.gameObject.SetActive(false);
+            //_scroller.transform.position = _scrollerStartPos;
         }
 
         private void Start()
@@ -158,15 +180,15 @@ namespace Domains.Core
         private async UniTaskVoid RunTimer()
         {
             GameTimer = 0;
-            var counter = 0f;
+            _counter = 0f;
             while (!_isGameOver) // add death cond
             {
-                counter += Time.deltaTime;
+                _counter += Time.deltaTime;
                 await UniTask.NextFrame();
-                if (!(counter >= _timeInterval)) 
+                if (!(_counter >= _timeInterval)) 
                     continue;
                 GameTimer++;
-                counter = 0;
+                _counter = 0;
                 _timer.text = GameTimer.ToString("D6");
             }
         }

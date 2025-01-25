@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour , IEffectable
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _trampolineJumpForce = 25f;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private LayerMask _groundLayer;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour , IEffectable
     [SerializeField] private List<Utils.SpawnPoint> _spawnPoints;
     
     public static Action OnPlayerDeath;
+    private bool _alive = true;
     public static Action<EffectArgs> OnPlayerCollectEffect;
     private const string Horizontal = "Horizontal";
     
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void MoveControl()
     {
+        if (!_alive) return;
         _moveDirection = Input.GetAxisRaw(Horizontal);
         transform.rotation = _moveDirection >= 0 ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, 180f, 0f);
     }
@@ -114,6 +117,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         if (other.CompareTag("Hazard"))
         {
             OnPlayerDeath?.Invoke();
+            FlipPlayerDead();
         }
         if (other.CompareTag("Enemy"))
         {
@@ -124,14 +128,22 @@ public class PlayerController : MonoBehaviour , IEffectable
                 return;
             }
             OnPlayerDeath?.Invoke();
+            FlipPlayerDead();
         }
-        
+
         else if (other.CompareTag("Effect"))
         {
             var effectItem = other.GetComponent<EffectItem>();
             OnPlayerCollectEffect?.Invoke(effectItem.EffectArgs);
             Destroy(other.gameObject);
         }
+    }
+
+    private void FlipPlayerDead()
+    {
+        transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y);
+        GetComponent<Collider2D>().enabled = false;
+        _alive = false;
     }
 
     public void ApplyEffect(GameModifier modifier)
@@ -176,5 +188,18 @@ public class PlayerController : MonoBehaviour , IEffectable
         Debug.Log("Player got Jump Modifier!");
         _playerSettings.JumpForce += 2;
         Utils.RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Trampoline"))
+            _rigidbody.velocity = Vector2.up * _trampolineJumpForce;
+    }
+
+    private void OnDestroy()
+    {
+        EffectsManager.Unsubscribe(GameModifierType.JetPack, this);
+        EffectsManager.Unsubscribe(GameModifierType.Jump, this);
+        EffectsManager.Unsubscribe(GameModifierType.Goggles, this);
     }
 }

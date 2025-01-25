@@ -9,6 +9,7 @@ TagManager:
   - Hazard
   - Effect
   - Enemy
+  - Trampoline
   layers:
   - Default
   - TransparentFX
