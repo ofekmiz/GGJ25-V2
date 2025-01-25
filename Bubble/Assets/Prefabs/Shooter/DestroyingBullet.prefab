@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -117,8 +117,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1423082837, guid: 9a9545e18b34440fd99e601c04711eca, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 089df5aacca6f4929bd48972cdb1f526, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7700706291288437992}
   _sprites:
-  - {fileID: -1423082837, guid: 9a9545e18b34440fd99e601c04711eca, type: 3}
-  - {fileID: 1795095735, guid: 9a9545e18b34440fd99e601c04711eca, type: 3}
-  - {fileID: 1000360707, guid: 9a9545e18b34440fd99e601c04711eca, type: 3}
+  - {fileID: 21300000, guid: 089df5aacca6f4929bd48972cdb1f526, type: 3}
+  - {fileID: 21300000, guid: 401691f43bd7f4855aed9f483510c334, type: 3}
+  - {fileID: 21300000, guid: 082d3e8c6e1bf4b4b8f682958b59e4c8, type: 3}
   _changeTime: 0.3

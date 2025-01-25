@@ -13,22 +13,21 @@ public class FTUEScreen : MonoBehaviour
     [SerializeField] private CanvasScaler _canvasScaler;
     private int _currentPageIndex = 0;
 
-    private void Awake()
-    {
-        Show();
-    }
+    private Action _closeCb;
 
-    public void Show()
+    public void Show(Action closeCb)
     {
         gameObject.SetActive(true);
         moveToFirstPageImmediate();
         Time.timeScale = 0;
+        _closeCb = closeCb;
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
         Time.timeScale = 1;
+        _closeCb?.Invoke();
     }
 
     private void Update()

@@ -18,14 +18,19 @@ namespace Domains.Core
         [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
+        [SerializeField] private GameObject _scroller;
+        [SerializeField] private Vector3 _scrollerStartPos;
+
         //[SerializeField] private PlayerController _playerController;
         [SerializeField] private TMP_Text _timer;
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
         [SerializeField] private GameOverScreen _gameOverScreen;
+        [SerializeField] private GameObject _startMenu;
         
         [SerializeField] private AudioManager _audioManager;
+
 
         private bool _isGameOver = false;
         
@@ -39,7 +44,7 @@ namespace Domains.Core
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
         public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
-        public static GameManager Instance; //Sorry not sorry
+        public static GameManager Instance; //Sorry not sorry // D:
 
 
         private void Awake()
@@ -54,6 +59,8 @@ namespace Domains.Core
             _audioManager.PlayBgAudio();
 
             PlayerController.OnPlayerDeath += OnGameOver;
+
+            _scrollerStartPos = _scroller.transform.position;
         }
 
         public void Init()
@@ -89,10 +96,13 @@ namespace Domains.Core
 
         public void RestartGame()
         {
-            _isGameOver = false;
-            _counter = 0f;
-            _bubbleSpawner.BeginsSpawn();
-            _gameOverScreen.gameObject.SetActive(false);
+            SceneManager.LoadScene("GameScene");
+            _startMenu?.gameObject.SetActive(false);
+            //_isGameOver = false;
+            //_counter = 0f;
+            //_bubbleSpawner.BeginsSpawn();
+            //_gameOverScreen.gameObject.SetActive(false);
+            //_scroller.transform.position = _scrollerStartPos;
         }
 
         private void Start()

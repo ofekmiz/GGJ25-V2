@@ -19,6 +19,8 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private float _fadeDuration = 1;
     
     [SerializeField] private Ease _fadeEase = Ease.InOutQuad;
+    
+    [SerializeField] FTUEScreen _ftueScreen;
 
     private void Awake()
     {
@@ -27,9 +29,11 @@ public class StartMenu : MonoBehaviour
 
     private void OnStartClicked()
     {
-        //gameObject.SetActive(false);
-        //_gm.Init();
+        _ftueScreen.Show(transitionToGameScene);
+    }
 
+    private void transitionToGameScene()
+    {
         SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
         _canvasGroup.DOFade(0, _fadeDuration).SetEase(_fadeEase).OnComplete(() =>
         {
