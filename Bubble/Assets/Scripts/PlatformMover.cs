@@ -183,7 +183,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
         pos.x += 2;
         pos.y = Random.Range(_maxMinHeight.x, _maxMinHeight.y);
         var enemy = Instantiate(_enemyPrefab, _container);
-        enemy.transform.position = pos;
+        enemy.transform.localPosition = pos;
         enemy.SetView(enemyVisual);
     }
 
