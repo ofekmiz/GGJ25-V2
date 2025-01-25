@@ -8,6 +8,7 @@ public class DestroyingBullet : Bullet
 {
     protected override void OnHitModifier(ModifierBubble modifierBubble)
     {
+        AudioManager.Instance.PlayGameAudio("DestroyBubblePop");
         Destroy(modifierBubble.gameObject);
     }
 }

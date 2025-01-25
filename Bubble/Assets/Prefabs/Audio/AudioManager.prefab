@@ -45,11 +45,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSourceCount: 5
-  _sounds: []
+  _sounds:
+  - Name: CollectBubblePop
+    Clips:
+    - {fileID: 8300000, guid: daf057731bf3449a89210151eef6a2bc, type: 3}
+    Pitch: 0
+    RandomPitch: 0.25
+    Volume: 1
+  - Name: DestroyBubblePop
+    Clips:
+    - {fileID: 8300000, guid: daf057731bf3449a89210151eef6a2bc, type: 3}
+    Pitch: 0.7
+    RandomPitch: 0.15
+    Volume: 1
+  - Name: CollectingShoot
+    Clips:
+    - {fileID: 8300000, guid: f0feb0efd8a05443a9cb3b6d0b71327b, type: 3}
+    Pitch: 1.3
+    RandomPitch: 0.15
+    Volume: 1
+  - Name: DestroyingShoot
+    Clips:
+    - {fileID: 8300000, guid: f0feb0efd8a05443a9cb3b6d0b71327b, type: 3}
+    Pitch: 0
+    RandomPitch: 0.15
+    Volume: 1
   _bgSound:
     Name: BG
     Clips:
     - {fileID: 8300000, guid: 10d1528a19ff448b29ce43703b5824fb, type: 3}
     Pitch: 0
     RandomPitch: 0
-    Volume: 1
+    Volume: 0.15
