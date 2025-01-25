@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         _rigidbody.position += new Vector2(_moveDirection * _playerSettings.MoveSpeed * Time.fixedDeltaTime, 0f);
         if (_jumpDirection > 0)
         {
+            AudioManager.Instance.PlayGameAudio("SheepJump");
             _rigidbody.velocity = Vector2.up * _playerSettings.JumpForce;
             _jumpDirection = 0;
         }
@@ -88,6 +89,12 @@ public class PlayerController : MonoBehaviour , IEffectable
         if (IsGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             _jumpDirection = _jumpForce;
+        }
+        
+        if (Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.W))
+        {
+            if (_rigidbody.velocity.y > 0)
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y / 2f);
         }
     }
 
