@@ -70,6 +70,13 @@ MonoBehaviour:
     Pitch: 0
     RandomPitch: 0.15
     Volume: 1
+  - Name: SheepJump
+    Clips:
+    - {fileID: 8300000, guid: f10d505db7d25479b9733e93216da238, type: 3}
+    - {fileID: 8300000, guid: bdae58d58d9d14e94abc38094e13e4ba, type: 3}
+    Pitch: 0
+    RandomPitch: 0.2
+    Volume: 0.803
   _bgSound:
     Name: BG
     Clips:
