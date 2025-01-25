@@ -1,6 +1,7 @@
 using Domains.Core;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,12 @@ public class StartMenu : MonoBehaviour
     [SerializeField]
     private GameManager _gm;
 
+    [SerializeField] private CanvasGroup _canvasGroup;
+    
+    [SerializeField] private float _fadeDuration = 1;
+    
+    [SerializeField] private Ease _fadeEase = Ease.InOutQuad;
+
     private void Awake()
     {
         _startBtn.onClick.AddListener(OnStartClicked);
@@ -23,9 +30,11 @@ public class StartMenu : MonoBehaviour
         //gameObject.SetActive(false);
         //_gm.Init();
 
-        SceneManager.LoadScene("GameScene");
-        SceneManager.UnloadSceneAsync("StartMenu");
-        
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Additive);
+        _canvasGroup.DOFade(0, _fadeDuration).SetEase(_fadeEase).OnComplete(() =>
+        {
+            SceneManager.UnloadSceneAsync("StartMenu");
+        });
     }
 
     private void OnDestroy()
