@@ -17,7 +17,7 @@ namespace Domains.Core
         [SerializeField] private BubblesManager _bubblesManager;
         [SerializeField] private Transform _bubblePoolParent;
 
-        [SerializeField] private PlayerController _playerController;
+        //[SerializeField] private PlayerController _playerController;
         [SerializeField] private TMP_Text _timer;
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
