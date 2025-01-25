@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Domains.Core;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public class GoodBullet : Bullet
 {

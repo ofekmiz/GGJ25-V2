@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour , IEffectable
     {
         EffectsManager.Subscribe(GameModifierType.JetPack, this);
         EffectsManager.Subscribe(GameModifierType.Jump, this);
+        EffectsManager.Subscribe(GameModifierType.Goggles, this);
         _playerSettings = new()
         {
             MoveSpeed = _moveSpeed,
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         if(_isGrounded)
             return;
         _rigidbody.velocity -= Vector2.up * (_playerSettings.FallIncrement * Time.fixedDeltaTime);
+        Debug.Log($"Falling {_rigidbody.velocity}");
     }
 
     private void CheckOnGround()
@@ -115,8 +117,14 @@ public class PlayerController : MonoBehaviour , IEffectable
     {
         switch (modifierType)
         {
-            case GameModifierType.Jump: ApplyJumpModifier(3); break;
-            case GameModifierType.JetPack: ApplyJetPack(3); break;
+            case GameModifierType.Jump: 
+                ApplyJumpModifier(3); 
+                break;
+            case GameModifierType.JetPack: 
+                ApplyJetPack(3); 
+                break;
+            case GameModifierType.Goggles: //show goggles on player
+                break;
         }
         
     }

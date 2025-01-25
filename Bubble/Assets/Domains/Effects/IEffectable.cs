@@ -9,7 +9,6 @@ public class EffectArgs
 public interface IEffectable
 {
 	void ApplyEffect(GameModifierType args);
-	void DisableEffect();
 }
 
 
