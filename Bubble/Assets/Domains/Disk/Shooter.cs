@@ -12,15 +12,18 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GoodBullet _goodBulletPrefab;
     [SerializeField] private DestroyingBullet _destroyingBulletPrefab;
     [SerializeField] private Transform _spawnPoint;
-    
-    
+
+    [SerializeField] private ProgressBarController _goodShotProgress;
+    [SerializeField] private ProgressBarController _destroyingShotProgress;
 
     private float _playTime;
     private float _timeToNextShot;
+    private float _currentShotInterval;
     
     void Awake()
     {
         _timeToNextShot = startShootInterval;
+        _currentShotInterval = startShootInterval;
     }
 
     void Update()
@@ -42,12 +45,14 @@ public class Shooter : MonoBehaviour
         _timeToNextShot -= Time.deltaTime;
         if (_timeToNextShot <= 0)
             shootGoodBullet();
+        
+        _goodShotProgress.SetProgress(1 - _timeToNextShot / _currentShotInterval);
     }
 
     private void shootGoodBullet()
     {
-        float currentShootInterval = Mathf.Lerp(startShootInterval, endShootInterval, _playTime / gameTime);
-        _timeToNextShot = currentShootInterval;
+        _currentShotInterval = Mathf.Lerp(startShootInterval, endShootInterval, _playTime / gameTime);
+        _timeToNextShot = _currentShotInterval;
 
         GoodBullet goodBullet = Instantiate(_goodBulletPrefab);
         goodBullet.transform.position = _spawnPoint.position;

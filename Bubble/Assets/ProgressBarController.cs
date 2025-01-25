@@ -34,4 +34,10 @@ public class ProgressBarController : MonoBehaviour
         // Ensure changes in the Editor update the progress bar and prefab
         Update();
     }
+
+    public void SetProgress(float progress)
+    {
+        this.progress = progress;
+        Update();
+    }
 }
