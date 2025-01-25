@@ -88,7 +88,7 @@ public class Platform : MonoBehaviour
 			foreach (var visual in _visuals)
 			{
 				size = visual.size;
-				size *= Settings.ShortValue;
+				size.x *= Settings.ShortValue;
 				visual.size = size;
 			}
 		}

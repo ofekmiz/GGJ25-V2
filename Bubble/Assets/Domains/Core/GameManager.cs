@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Domains.Bubbles.BubbleSpawner;
@@ -103,6 +104,29 @@ namespace Domains.Core
                 {
                     Type = GameModifierType.ShortPlatforms
                 });
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.JetPack
+                });
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                _effectsManager.PlayEffect(new()
+                {
+                    Type = GameModifierType.Jump
+                });
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                _effectsManager.PlayEffect(_gameModifiersManager.GameModifiers
+                    .Where(m => m.Type == GameModifierType.Enemy)
+                    .GetRandom());
             }
         }
 
