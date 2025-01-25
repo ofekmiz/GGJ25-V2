@@ -6,13 +6,11 @@ public class ModifierBubble : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _icon;
     
-    private GameModifier _modifier;
+    public GameModifier Modifier {get; private set;}
     
     public void Set(GameModifier gameModifier)
     {
-        _modifier = gameModifier;
+        Modifier = gameModifier;
         _icon.sprite = gameModifier.Icon;
     }
-    
-    public GameModifierType ModifierType => _modifier.Type;
 }

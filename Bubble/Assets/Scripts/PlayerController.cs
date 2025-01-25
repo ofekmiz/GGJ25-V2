@@ -111,9 +111,9 @@ public class PlayerController : MonoBehaviour , IEffectable
         }
     }
     
-    public void ApplyEffect(GameModifierType type)
+    public void ApplyEffect(GameModifier modifier)
     {
-        switch (type)
+        switch (modifier.Type)
         {
             case GameModifierType.Jump: 
                 ApplyJumpModifier(3); 

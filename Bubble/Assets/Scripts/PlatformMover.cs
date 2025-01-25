@@ -17,6 +17,11 @@ public class PlatformMover : MonoBehaviour, IEffectable
     [Header("Incremental Settings")]
     [SerializeField] private float _speedIncrement = 0.5f;
     [SerializeField] private float _intervals = 3;
+
+    [Header("Modifiers Settings")] 
+    [SerializeField] private Enemy _enemyPrefab;
+    [SerializeField] private Vector2 _enemyMaxMinHeight;
+    [SerializeField] private float _shortState = 0.5f;
     public static float PlatformHideLocation { get; private set; }
     private float _position;
     private float _timer;
@@ -31,13 +36,14 @@ public class PlatformMover : MonoBehaviour, IEffectable
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(new Vector3(_container.position.x, _maxMinHeight.x + _maxMinHeight.y / 2, 0), new Vector3(1, _maxMinHeight.y - _maxMinHeight.x, 0 ));
-        
+        Gizmos.DrawWireCube(new Vector3(_revealPlatform.position.x, _enemyMaxMinHeight.x + _enemyMaxMinHeight.y / 2, 0), new Vector3(1, _enemyMaxMinHeight.y - _enemyMaxMinHeight.x, 0 ));
     }
 
     private void Awake()
     {
         EffectsManager.Subscribe(GameModifierType.BreakablePlatforms, this);
         EffectsManager.Subscribe(GameModifierType.ShortPlatforms, this);
+        EffectsManager.Subscribe(GameModifierType.Enemy, this);
         PlatformHideLocation = _maxMinHeight.x - 2;
         _platformPool = new ObjectPool<Platform>(() => Instantiate(_platform, _container),
             t => t.gameObject.SetActive(true),
@@ -73,7 +79,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
         Platform.OnPlayerGround = ApplyPlayerScrollMovement;
         _position = _distance;
         _startPlatformInstance = Instantiate(_startPlatform, _container);
-        _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero, ShowOnStart = true});
+        _startPlatformInstance.Set(new PlatformInitArgs(){Position = Vector3.zero, ShowOnStart = true, ShortValue = 1f});
         GenerateNext();
     }
 
@@ -96,7 +102,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
             
             var pos = Vector3.right * _position;
             pos.y = Random.Range(_maxMinHeight.x, _maxMinHeight.y);
-            platform.Set(new() {Position = pos, ShowOnStart = _revealPlatform.localPosition.x > _position});
+            platform.Set(new() {Position = pos, ShowOnStart = _revealPlatform.localPosition.x > _position, ShortValue = _shortState});
             _platforms.Add(platform);
             _platformCount++;
         }
@@ -121,15 +127,25 @@ public class PlatformMover : MonoBehaviour, IEffectable
         _container.position += new Vector3(-_moveRate * Time.deltaTime, 0, 0);
     }
 
-    public void ApplyEffect(GameModifierType type)
+    public void ApplyEffect(GameModifier modifier)
     {
-        switch (type)
+        switch (modifier.Type)
         {
-            case GameModifierType.BreakablePlatforms:
-                ApplyBreakablePlatform(5); break;
-            case GameModifierType.ShortPlatforms:
-                ApplyShortPlatforms(5); break;
+            case GameModifierType.BreakablePlatforms: ApplyBreakablePlatform(5); break;
+            case GameModifierType.ShortPlatforms: ApplyShortPlatforms(5); break;
+            case GameModifierType.Enemy: GenerateEnemy(modifier.Prefab); break;
         }
+    }
+
+    private void GenerateEnemy(GameObject enemyVisual)
+    {
+        //get pos
+        var pos = _revealPlatform.position;
+        pos.x += 2;
+        pos.y = Random.Range(_maxMinHeight.x, _maxMinHeight.y);
+        var enemy = Instantiate(_enemyPrefab, _container);
+        enemy.transform.position = pos;
+        enemy.SetView(enemyVisual);
     }
 
     private void ApplyShortPlatforms(float duration)

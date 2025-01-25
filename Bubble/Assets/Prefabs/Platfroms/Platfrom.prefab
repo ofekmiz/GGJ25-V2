@@ -327,6 +327,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dontHidePlatform: 0
   _view: {fileID: 2547389140152569734}
+  _shortState: 0
+  _collider: {fileID: 1736457726874562270}
+  _visuals:
+  - {fileID: 686411407502445343}
+  - {fileID: 8233732456230258882}
 --- !u!50 &2769652750312403699
 Rigidbody2D:
   serializedVersion: 4
