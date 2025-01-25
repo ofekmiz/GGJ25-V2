@@ -29,6 +29,7 @@ namespace Domains.Core
         private Dependencies _dependencies;
         private float _timeInterval = 0.5f;
         public int GameTimer { get; private set; }
+        private EffectsManager _effectsManager;
 
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
@@ -39,6 +40,7 @@ namespace Domains.Core
 
         private void Awake()
         {
+            _effectsManager = new();
             Instance = this;
             _bubbleSpawner.Init(_gameModifiersManager); //TODO::move to init later
         }
@@ -70,7 +72,7 @@ namespace Domains.Core
 
         public void GameModifierCollected(GameModifierType modifierType)
         {
-            _playerController.GameModifierCollected(modifierType);
+            _effectsManager.PlayEffect(modifierType);
         }
 
         private void Start()
