@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7541246202124109990}
   - component: {fileID: 579475179236143393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Container_Dream
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3838668351111495862}
   - component: {fileID: 4425091313070756183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mask_DreamBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5060801763885708306}
   - component: {fileID: 6149048790485692470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8441956450931274089}
   - component: {fileID: 3537306370082946277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3504141624008174112}
   - component: {fileID: 8664037520330589705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7358650632091463826}
   - component: {fileID: 4246496028734218571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlurCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8493977505022961931}
   - component: {fileID: 2829819710022807395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,6 +568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbledDreamEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 862117113613166603, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4911184937921605939, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.3
@@ -646,6 +650,10 @@ PrefabInstance:
       propertyPath: _maxMinHeight.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1901201742998184121, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2798014427778480924, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.78
@@ -653,6 +661,22 @@ PrefabInstance:
     - target: {fileID: 3837879822055766661, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
       propertyPath: m_Name
       value: PlatfromMover
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837879822055766661, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936323867582686678, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544741884704463274, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6230338629029251863, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8472410855112778057, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -771,6 +795,14 @@ PrefabInstance:
     - target: {fileID: 3766074116194668856, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766074116194668856, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566778615496872639, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5048460734913904610, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
       propertyPath: m_SortingLayer
