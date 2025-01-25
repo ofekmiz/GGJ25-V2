@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         EffectsManager.Subscribe(GameModifierType.Jump, this);
         EffectsManager.Subscribe(GameModifierType.Goggles, this);
         EffectsManager.Subscribe(GameModifierType.Hat, this);
+        EffectsManager.Subscribe(GameModifierType.Shield, this);
         _playerSettings = new()
         {
             MoveSpeed = _moveSpeed,
@@ -139,6 +140,7 @@ public class PlayerController : MonoBehaviour , IEffectable
             {
                 Destroy(other.gameObject);
                 Destroy(_shield);
+                Utils.RunTimer(0.1f, () => _playerSettings.HasShield = false).Forget(); 
                 return;
             }
             OnPlayerDeath?.Invoke();
@@ -227,5 +229,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         EffectsManager.Unsubscribe(GameModifierType.JetPack, this);
         EffectsManager.Unsubscribe(GameModifierType.Jump, this);
         EffectsManager.Unsubscribe(GameModifierType.Goggles, this);
+        EffectsManager.Subscribe(GameModifierType.Shield, this);
+        EffectsManager.Subscribe(GameModifierType.Hat, this);
     }
 }
