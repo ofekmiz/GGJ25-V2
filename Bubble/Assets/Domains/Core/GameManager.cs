@@ -22,10 +22,14 @@ namespace Domains.Core
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
+        [SerializeField] private GameOverManager _gameOverManager;
+
+        private bool _isGameOver = false;
         
         private Dependencies _dependencies;
         private float _timeInterval = 0.5f;
         public int GameTimer { get; private set; }
+        private EffectsManager _effectsManager;
 
 
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
@@ -36,6 +40,7 @@ namespace Domains.Core
 
         private void Awake()
         {
+            _effectsManager = new();
             Instance = this;
             _bubbleSpawner.Init(_gameModifiersManager); //TODO::move to init later
         }
@@ -51,11 +56,23 @@ namespace Domains.Core
 
             _bubbleFactory.Init(this, _bubblePoolParent);
             _bubblesManager.Init(this, BubbleFactory);
+
+            PlayerController.OnPlayerDeath += OnGameOver;
+        }
+
+        private void OnDisable()
+        {
+            PlayerController.OnPlayerDeath -= OnGameOver;
+        }
+        private void OnGameOver()
+        {
+            _isGameOver = true;
+            _gameOverManager.OnGameOver();
         }
 
         public void GameModifierCollected(GameModifierType modifierType)
         {
-            _playerController.GameModifierCollected(modifierType);
+            _effectsManager.PlayEffect(modifierType);
         }
 
         private void Start()
@@ -68,7 +85,7 @@ namespace Domains.Core
         {
             GameTimer = 0;
             var counter = 0f;
-            while (true)
+            while (!_isGameOver) // add death cond
             {
                 counter += Time.deltaTime;
                 await UniTask.NextFrame();

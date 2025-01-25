@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void Awake()
     {
-        EffectsManager.Subscribe("jetpack", this);
+        EffectsManager.Subscribe(GameModifierType.JetPack, this);
+        EffectsManager.Subscribe(GameModifierType.Jump, this);
         _playerSettings = new()
         {
             MoveSpeed = _moveSpeed,
@@ -110,24 +111,20 @@ public class PlayerController : MonoBehaviour , IEffectable
         }
     }
     
-    public void ApplyEffect(EffectArgs args)
+    public void ApplyEffect(GameModifierType modifierType)
     {
-        if (args is JetPackArgs jetPackArgs)
+        switch (modifierType)
         {
-            ApplyJetPack(jetPackArgs.Duration).Forget();
+            case GameModifierType.Jump: ApplyJumpModifier(3); break;
+            case GameModifierType.JetPack: ApplyJetPack(3); break;
         }
+        
     }
 
-    private async UniTaskVoid ApplyJetPack(float duration)
+    private void ApplyJetPack(float duration)
     {
-        while (duration > 0 )
-        {
-            _playerSettings.FallIncrement = 0;
-            duration -= Time.deltaTime;
-            await UniTask.NextFrame();
-        }
-
-        _playerSettings.FallIncrement = _fallIncrement;
+        _playerSettings.FallIncrement = 0;
+        RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
     }
 
     public void DisableEffect()
@@ -135,24 +132,22 @@ public class PlayerController : MonoBehaviour , IEffectable
      
     }
 
-    public void GameModifierCollected(GameModifierType modifierType)
-    {
-        if (modifierType == GameModifierType.Random)
-            modifierType = (GameModifierType)Random.Range(0, Enum.GetValues(typeof(GameModifierType)).Length - 1);
-        
-        switch (modifierType)
-        {
-            case GameModifierType.Jump: ApplyJumpModifier(); break;
-        }
-    }
-
-    private void ApplyJumpModifier()
+    private void ApplyJumpModifier(float duration)
     {
         _playerSettings.JumpForce += 2;
+        RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
     }
-}
 
-public class JetPackArgs : EffectArgs
-{
-    public float Duration;
+    private async UniTaskVoid RunTimer(float duration, Action onEnd)
+    {
+        if (duration == 0)
+            return;
+        
+        while (duration > 0 )
+        {
+            duration -= Time.deltaTime;
+            await UniTask.NextFrame();
+        }
+        onEnd?.Invoke();
+    }
 }
