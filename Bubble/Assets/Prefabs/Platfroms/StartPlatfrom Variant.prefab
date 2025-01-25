@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1736457726874562270, guid: 04db9b4ad5fa542f99befb8a2f12828f, type: 3}
+      propertyPath: m_Size.x
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3662771738095307137, guid: 04db9b4ad5fa542f99befb8a2f12828f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

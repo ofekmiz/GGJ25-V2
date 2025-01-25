@@ -23,7 +23,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
     private int _platformCount;
     private Platform _startPlatformInstance;
     
-    private List<Platform> _platforms;
+    private List<Platform> _platforms = new();
 
     ObjectPool<Platform> _platformPool;
     private PlayerController _playerMove;
@@ -126,9 +126,9 @@ public class PlatformMover : MonoBehaviour, IEffectable
         switch (type)
         {
             case GameModifierType.BreakablePlatforms:
-                ApplyBreakablePlatform(3); break;
+                ApplyBreakablePlatform(5); break;
             case GameModifierType.ShortPlatforms:
-                ApplyShortPlatforms(3); break;
+                ApplyShortPlatforms(5); break;
         }
     }
 

@@ -19,6 +19,7 @@ public class Platform : MonoBehaviour
 	public static Action<Platform> OnReachStart;
 	public static Action<PlayerController> OnPlayerGround;
 	[SerializeField] private bool _dontHidePlatform;
+	[SerializeField] private Transform _view;
 
 	public PlatformInitArgs Settings;
 	public bool IsShown { get; private set; }
@@ -38,11 +39,12 @@ public class Platform : MonoBehaviour
 		if (!player) 
 			return;
 		OnPlayerGround?.Invoke(player);
-		if (!Settings.Breakable || !IsShown) 
-			return;
-		IsShown = false;
-		transform.DOShakePosition(2, 0.1f).SetLink(gameObject);
-		Utils.RunTimer(2, Hide().Forget).Forget();
+		if (Settings.Breakable && IsShown && player.IsGrounded)
+		{
+			IsShown = false;
+			_view.DOShakePosition(2, 0.1f).SetLink(gameObject);
+			Utils.RunTimer(2, () => Hide().Forget()).Forget();
+		}
 	}
 
 	private void OnCollisionExit2D(Collision2D other)
@@ -74,6 +76,10 @@ public class Platform : MonoBehaviour
 	private async UniTaskVoid Show()
 	{
 		IsShown = true;
+		if (Settings.Short)
+		{
+			
+		}
 		await transform.DOLocalMoveY(Settings.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 	}
 }

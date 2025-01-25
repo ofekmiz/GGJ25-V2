@@ -81,6 +81,14 @@ namespace Domains.Core
             RunTimer().Forget();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                _effectsManager.PlayEffect(GameModifierType.BreakablePlatforms);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                _effectsManager.PlayEffect(GameModifierType.ShortPlatforms);
+        }
+
         private async UniTaskVoid RunTimer()
         {
             GameTimer = 0;
