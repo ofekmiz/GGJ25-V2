@@ -77,6 +77,14 @@ MonoBehaviour:
     Pitch: 0
     RandomPitch: 0.2
     Volume: 0.803
+  - Name: Loose
+    Clips:
+    - {fileID: 8300000, guid: ad53e9f2dedd84d1db8f3a0e327db116, type: 3}
+    - {fileID: 8300000, guid: ecd95543837db43548c69faf36e031fe, type: 3}
+    - {fileID: 8300000, guid: 054f5a04b270842c69385c4c3d32c359, type: 3}
+    Pitch: 0
+    RandomPitch: 0
+    Volume: 1
   _bgSound:
     Name: BG
     Clips:

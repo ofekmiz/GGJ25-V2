@@ -32,6 +32,8 @@ public class Platform : MonoBehaviour
 	[SerializeField] private BoxCollider2D _collider;
 	[SerializeField] private List<SpriteRenderer> _visuals;
 
+	public Transform TopPoint;
+	
 	public PlatformInitArgs Settings;
 	public bool IsShown { get; private set; }
 	public void Set(PlatformInitArgs args)
