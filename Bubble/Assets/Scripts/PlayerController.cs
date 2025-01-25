@@ -150,8 +150,8 @@ public class PlayerController : MonoBehaviour , IEffectable
     {
         switch (modifier.Type)
         {
-            case GameModifierType.Jump: ApplyJumpModifier(3); break; 
-            case GameModifierType.JetPack: ApplyJetPack(3); break;
+            case GameModifierType.Jump: ApplyJumpModifier(modifier, 3); return; 
+            case GameModifierType.JetPack: ApplyJetPack(modifier,3); return;
             case GameModifierType.Shield: AddShied(modifier); return;
         }
 
@@ -175,19 +175,31 @@ public class PlayerController : MonoBehaviour , IEffectable
         return Instantiate(modifier.Prefab, spawnPoint.Parent);
     }
 
-    private void ApplyJetPack(float duration)
+    private void ApplyJetPack(GameModifier modifier, float duration)
     {
         Debug.Log("Player got Jet Pack!");
         _playerSettings.FallIncrement = 0;
-        Utils.RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
+        var instance = Spawn(modifier);
+        Utils.RunTimer(duration, () =>
+        {
+            _playerSettings.FallIncrement = _fallIncrement;
+            if(instance)
+                Destroy(instance);
+        }).Forget();
     }
     
 
-    private void ApplyJumpModifier(float duration)
+    private void ApplyJumpModifier(GameModifier modifier, float duration)
     {
         Debug.Log("Player got Jump Modifier!");
         _playerSettings.JumpForce += 2;
-        Utils.RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
+        var instance = Spawn(modifier);
+        Utils.RunTimer(duration, () =>
+        {
+            _playerSettings.JumpForce -= 2f;
+            if(instance)
+                Destroy(instance);
+        }).Forget();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
