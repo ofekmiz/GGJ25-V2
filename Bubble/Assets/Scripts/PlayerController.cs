@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour , IEffectable
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _fallIncrement = 10;
     [SerializeField] private List<Utils.SpawnPoint> _spawnPoints;
+
+    [SerializeField] private Animator _animator;
     
     public static Action OnPlayerDeath;
     private bool _alive = true;
@@ -110,6 +112,15 @@ public class PlayerController : MonoBehaviour , IEffectable
         if (!_alive) return;
         _moveDirection = Input.GetAxisRaw(Horizontal);
         transform.rotation = _moveDirection >= 0 ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, 180f, 0f);
+
+        if (_moveDirection != 0)
+        {
+            _animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("isWalking", false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
