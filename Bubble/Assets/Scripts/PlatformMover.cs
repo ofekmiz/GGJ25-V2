@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -27,6 +28,8 @@ public class PlatformMover : MonoBehaviour, IEffectable
     [SerializeField] private float _spawnDistance = 20f;
     
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private float _blockDuration = 3f;
+    [SerializeField] private Transform[] _blockersSpawnPoints;
     
     public static float PlatformHideLocation { get; private set; }
     private float _position;
@@ -52,8 +55,9 @@ public class PlatformMover : MonoBehaviour, IEffectable
         EffectsManager.Subscribe(GameModifierType.ShortPlatforms, this);
         EffectsManager.Subscribe(GameModifierType.LongPlatforms, this);
         EffectsManager.Subscribe(GameModifierType.Enemy, this);
+        EffectsManager.Subscribe(GameModifierType.Blocker, this);
         EffectsManager.Subscribe(GameModifierType.Trampoline, this);
-        
+
         PlatformHideLocation = _maxMinHeight.x - 2;
         _platformPool = new ObjectPool<Platform>(() => Instantiate(_platform, _container),
             t => t.gameObject.SetActive(true),
@@ -148,7 +152,22 @@ public class PlatformMover : MonoBehaviour, IEffectable
             case GameModifierType.Slow: SlowSpeed(); break;
             case GameModifierType.Enemy: GenerateEnemy(modifier.Prefab); break;
             case GameModifierType.Trampoline: GenerateTrampoline(modifier.Prefab); break;
+            case GameModifierType.Blocker: GenerateBlocker(modifier.Prefab); break;
         }
+    }
+
+    private async UniTaskVoid GenerateBlocker(GameObject modifierPrefab)
+    {
+        var index = Random.Range(0, _blockersSpawnPoints.Length);
+        var spawnPoint = _blockersSpawnPoints[index];
+        var pos = spawnPoint.position;
+        pos.y = PlatformHideLocation;
+        var block = Instantiate(modifierPrefab, transform);
+        block.transform.position = pos;
+        await block.transform.DOLocalMoveY(Random.Range(_enemyMaxMinHeight.x, _enemyMaxMinHeight.y), 1).AsyncWaitForCompletion();
+        await UniTask.WaitForSeconds(_blockDuration);
+        await block.transform.DOLocalMoveY(PlatformHideLocation, 1).AsyncWaitForCompletion();
+        Destroy(block);
     }
 
     private void SlowSpeed()
