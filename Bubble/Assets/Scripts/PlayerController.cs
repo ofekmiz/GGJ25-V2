@@ -195,4 +195,11 @@ public class PlayerController : MonoBehaviour , IEffectable
         if (other.gameObject.CompareTag("Trampoline"))
             _rigidbody.velocity = Vector2.up * _trampolineJumpForce;
     }
+
+    private void OnDestroy()
+    {
+        EffectsManager.Unsubscribe(GameModifierType.JetPack, this);
+        EffectsManager.Unsubscribe(GameModifierType.Jump, this);
+        EffectsManager.Unsubscribe(GameModifierType.Goggles, this);
+    }
 }
