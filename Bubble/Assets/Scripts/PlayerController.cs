@@ -113,6 +113,8 @@ public class PlayerController : MonoBehaviour , IEffectable
         _moveDirection = Input.GetAxisRaw(Horizontal);
         transform.rotation = _moveDirection >= 0 ? Quaternion.Euler(0f, 0f, 0f) : Quaternion.Euler(0f, 180f, 0f);
 
+        if(!_animator)
+            return;
         if (_moveDirection != 0)
         {
             _animator.SetBool("isWalking", true);
