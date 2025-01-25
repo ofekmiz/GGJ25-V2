@@ -23,7 +23,7 @@ namespace Domains.Core
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
-        [SerializeField] private GameOverManager _gameOverManager;
+        [SerializeField] private GameOverScreen _gameOverScreen;
         
         [SerializeField] private AudioManager _audioManager;
 
@@ -50,6 +50,8 @@ namespace Domains.Core
             _bubbleSpawner.Init(_gameModifiersManager);
             _audioManager.Init();
             _audioManager.PlayBgAudio();
+
+            PlayerController.OnPlayerDeath += OnGameOver;
         }
 
         public void Init()
@@ -63,8 +65,6 @@ namespace Domains.Core
 
             _bubbleFactory.Init(this, _bubblePoolParent);
             _bubblesManager.Init(this, BubbleFactory);
-
-            PlayerController.OnPlayerDeath += OnGameOver;
         }
 
         private void OnDisable()
@@ -74,7 +74,8 @@ namespace Domains.Core
         private void OnGameOver()
         {
             _isGameOver = true;
-            _gameOverManager.OnGameOver();
+            _gameOverScreen.gameObject.SetActive(true);
+            _gameOverScreen.SetScore(int.Parse(_timer.text));
         }
 
         public void GameModifierCollected(GameModifier modifierType)
