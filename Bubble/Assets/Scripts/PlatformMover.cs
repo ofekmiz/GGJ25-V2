@@ -191,6 +191,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
     {
         var targetPlatform = getPlatformNearPlayer();
         var trampoline = Instantiate(_trampolinePrefab);
+        trampoline.SetView(trampolineVisual);
         trampoline.transform.SetParent(targetPlatform.transform);
         trampoline.transform.position = targetPlatform.TopPoint.position;
     }
