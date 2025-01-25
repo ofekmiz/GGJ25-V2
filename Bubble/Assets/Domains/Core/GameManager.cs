@@ -22,6 +22,9 @@ namespace Domains.Core
 
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
+        [SerializeField] private GameOverManager _gameOverManager;
+
+        private bool _isGameOver = false;
         
         private Dependencies _dependencies;
         private float _timeInterval = 0.5f;
@@ -51,6 +54,18 @@ namespace Domains.Core
 
             _bubbleFactory.Init(this, _bubblePoolParent);
             _bubblesManager.Init(this, BubbleFactory);
+
+            PlayerController.OnPlayerDeath += OnGameOver;
+        }
+
+        private void OnDisable()
+        {
+            PlayerController.OnPlayerDeath -= OnGameOver;
+        }
+        private void OnGameOver()
+        {
+            _isGameOver = true;
+            _gameOverManager.OnGameOver();
         }
 
         public void GameModifierCollected(GameModifierType modifierType)
@@ -68,7 +83,7 @@ namespace Domains.Core
         {
             GameTimer = 0;
             var counter = 0f;
-            while (true)
+            while (!_isGameOver) // add death cond
             {
                 counter += Time.deltaTime;
                 await UniTask.NextFrame();
