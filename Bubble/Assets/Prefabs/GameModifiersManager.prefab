@@ -46,23 +46,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameModifiers:
   - Type: 1
-    Icon: {fileID: 21300000, guid: 7a8cc66df6aa24718b4303ff5cf9c535, type: 3}
+    Icon: {fileID: 21300000, guid: 46d009df0886f4030ac50b420291d352, type: 3}
     Good: 1
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 1639919609012114968, guid: 6f26267f8dc174da282fb57dc8f4eda1, type: 3}
   - Type: 3
     Icon: {fileID: 21300000, guid: f71fc2b134ed1496abc7ea9a68956acb, type: 3}
     Good: 1
     Prefab: {fileID: 3302649134079705759, guid: 94497e0f234854ba3918b3866f889a5a, type: 3}
   - Type: 4
-    Icon: {fileID: 21300000, guid: f13abd23cc96b4844ac9da3cb22b9fe3, type: 3}
+    Icon: {fileID: 21300000, guid: 5c395487ef6ab41dda37ed2698b075c4, type: 3}
     Good: 1
     Prefab: {fileID: 0}
   - Type: 5
-    Icon: {fileID: 21300000, guid: 5d758f149ddbf40908b7e3c384947563, type: 3}
+    Icon: {fileID: 21300000, guid: c0545dd2375784f98b0e12178884b63f, type: 3}
     Good: 0
     Prefab: {fileID: 0}
   - Type: 6
-    Icon: {fileID: 21300000, guid: 0db0058cfa724490b8fa73dfd44ae77a, type: 3}
+    Icon: {fileID: 21300000, guid: 948712ae12804458299d240c9c4fef35, type: 3}
     Good: 0
     Prefab: {fileID: 0}
   - Type: 7
