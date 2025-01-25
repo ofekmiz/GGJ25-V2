@@ -1136,7 +1136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1482039522703229275, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
       propertyPath: m_Name
-      value: Jetpack_Or_Hat
+      value: Jetpack_Or_Shield
       objectReference: {fileID: 0}
     - target: {fileID: 7541246202124109990, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
       propertyPath: m_LocalPosition.x
