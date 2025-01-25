@@ -83,7 +83,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!95 &7558766260094150678
 Animator:
@@ -373,7 +373,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!1001 &1918249143143797531
 PrefabInstance:
@@ -586,6 +586,10 @@ PrefabInstance:
     - target: {fileID: 7563717033651108562, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
       propertyPath: m_SortingLayerID
       value: -1277251311
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563717033651108562, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -804,6 +808,10 @@ PrefabInstance:
     - target: {fileID: 7563717033651108562, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
       propertyPath: m_SortingLayerID
       value: -1277251311
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563717033651108562, guid: b55ccc8dfd8cf47ea8ea35d321b13425, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
