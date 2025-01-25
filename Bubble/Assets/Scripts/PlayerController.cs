@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour , IEffectable
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _trampolineJumpForce = 25f;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private LayerMask _groundLayer;
@@ -181,6 +182,6 @@ public class PlayerController : MonoBehaviour , IEffectable
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Trampoline"))
-            _rigidbody.velocity = Vector2.up * _playerSettings.JumpForce * 2;
+            _rigidbody.velocity = Vector2.up * _trampolineJumpForce;
     }
 }

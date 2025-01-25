@@ -91,4 +91,4 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 10d1528a19ff448b29ce43703b5824fb, type: 3}
     Pitch: 0
     RandomPitch: 0
-    Volume: 0.15
+    Volume: 0.125
