@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 3950026095
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -50,4 +53,7 @@ TagManager:
     locked: 0
   - name: Bubbles
     uniqueID: 602017753
+    locked: 0
+  - name: UI
+    uniqueID: 582861651
     locked: 0

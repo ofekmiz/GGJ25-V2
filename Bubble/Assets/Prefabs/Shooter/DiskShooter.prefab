@@ -270,6 +270,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9084880325943656462, guid: 8012b42c7f44f4dd491c886446bd7367, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 582861651
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

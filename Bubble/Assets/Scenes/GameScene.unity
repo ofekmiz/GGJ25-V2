@@ -465,17 +465,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8752888290147532993, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
-      propertyPath: m_Name
-      value: BackGroundCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084880325943656462, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
+    - target: {fileID: 2502613157389084439, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 9084880325943656462, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
+    - target: {fileID: 3504170558016486857, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 8752888290147532993, guid: be2d5976488fe4f9792b548809169aa3, type: 3}
+      propertyPath: m_Name
+      value: UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
