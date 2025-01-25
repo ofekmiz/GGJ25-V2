@@ -9,6 +9,8 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float endShootInterval = 1;
     [SerializeField] private float gameTime = 60;
 
+    [SerializeField] private float destroyShootCooldown = 2f;
+
     [SerializeField] private GoodBullet _goodBulletPrefab;
     [SerializeField] private DestroyingBullet _destroyingBulletPrefab;
     [SerializeField] private Transform _spawnPoint;
@@ -19,6 +21,8 @@ public class Shooter : MonoBehaviour
     private float _playTime;
     private float _timeToNextShot;
     private float _currentShotInterval;
+
+    private float _timeToDestroyShootAvailable = 0;
     
     void Awake()
     {
@@ -29,6 +33,9 @@ public class Shooter : MonoBehaviour
     void Update()
     {
         _playTime += Time.deltaTime;
+        
+        _timeToDestroyShootAvailable -= Time.deltaTime;
+        _destroyingShotProgress.SetProgress(1 - _timeToDestroyShootAvailable / destroyShootCooldown);
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -61,6 +68,10 @@ public class Shooter : MonoBehaviour
     
     private void shootDestroyingBullet()
     {
+        if (_timeToDestroyShootAvailable > 0)
+            return;
+
+        _timeToDestroyShootAvailable = destroyShootCooldown;
         //AudioManager.Instance.PlayGameAudio("DestroyingShoot");
         DestroyingBullet destroyingBullet = Instantiate(_destroyingBulletPrefab);
         destroyingBullet.transform.position = _spawnPoint.position;
