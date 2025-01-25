@@ -96,6 +96,7 @@ MonoBehaviour:
   _spawnPoints:
   - Key: 3
     Parent: {fileID: 7903690263768447471}
+  _animator: {fileID: 5124435790981808251}
 --- !u!50 &3757283475958145802
 Rigidbody2D:
   serializedVersion: 4
@@ -417,6 +418,22 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5031806165769747968, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031806165769747968, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031806165769747968, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -344941201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031806165769747968, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5318960016985764499, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -528,6 +545,11 @@ PrefabInstance:
 --- !u!4 &759959060727078625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1999208119350072443, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
+  m_PrefabInstance: {fileID: 1240028717662210714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5124435790981808251 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6208441608985037537, guid: 536d8160db4d84faa887625b6626cbc6, type: 3}
   m_PrefabInstance: {fileID: 1240028717662210714}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9202064779812990008 stripped
