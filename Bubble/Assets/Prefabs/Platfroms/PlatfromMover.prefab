@@ -192,6 +192,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: -4505513650456162589, guid: b6c287ebf5ea1470593216337bd9c39d, type: 3}
   _enemyMaxMinHeight: {x: 3, y: 8}
   _shortState: 0.666
+  _trampolinePrefab: {fileID: 5467328850260571913, guid: b2f050147f3e14e5e9bfed3948c15dbb, type: 3}
 --- !u!1 &3936323867582686678
 GameObject:
   m_ObjectHideFlags: 0

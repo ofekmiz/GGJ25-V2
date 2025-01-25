@@ -396,6 +396,10 @@ PrefabInstance:
       propertyPath: _maxMinHeight.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1212423062458279191, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
+      propertyPath: _playerController
+      value: 
+      objectReference: {fileID: 5316062539140806156}
     - target: {fileID: 1901201742998184121, guid: 19c148e1bdf6b4fc5802cc3e02631e2c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -621,6 +625,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
+--- !u!114 &5316062539140806156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3441046013174486251, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}
+  m_PrefabInstance: {fileID: 7351985279025390311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97804f62eac7e1e4d8b310e607619676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6336694644810742581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3600356994539968978, guid: 8741fd1e91d1d489f81d8fc3618f97f2, type: 3}

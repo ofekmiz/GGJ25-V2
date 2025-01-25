@@ -177,4 +177,10 @@ public class PlayerController : MonoBehaviour , IEffectable
         _playerSettings.JumpForce += 2;
         Utils.RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Trampoline"))
+            _rigidbody.velocity = Vector2.up * _playerSettings.JumpForce * 2;
+    }
 }
