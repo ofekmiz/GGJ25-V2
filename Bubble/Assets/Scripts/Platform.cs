@@ -12,7 +12,14 @@ public struct PlatformInitArgs
 	public float ShortValue;
 	public bool ShowOnStart;
 	public bool Breakable;
-	public bool Short;
+	public PlatformState State;
+}
+
+public enum PlatformState
+{
+	None,
+	Short,
+	Long
 }
 
 public class Platform : MonoBehaviour
@@ -80,18 +87,22 @@ public class Platform : MonoBehaviour
 	private async UniTaskVoid Show()
 	{
 		IsShown = true;
-		if (Settings.Short)
+		var width = _collider.size.x;
+		if (Settings.State == PlatformState.Short)
+			width *= Settings.ShortValue;
+		if (Settings.State == PlatformState.Long)
+			width *= (1 - Settings.ShortValue);
+			
+		var size = _collider.size;
+		size.x = width;
+		_collider.size = size;
+		foreach (var visual in _visuals)
 		{
-			var size = _collider.size;
-			size.x *= Settings.ShortValue;
-			_collider.size = size;
-			foreach (var visual in _visuals)
-			{
-				size = visual.size;
-				size.x *= Settings.ShortValue;
-				visual.size = size;
-			}
+			size = visual.size;
+			size.x = width;
+			visual.size = size;
 		}
+		
 		await transform.DOLocalMoveY(Settings.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 	}
 }

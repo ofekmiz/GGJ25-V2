@@ -43,6 +43,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
     {
         EffectsManager.Subscribe(GameModifierType.BreakablePlatforms, this);
         EffectsManager.Subscribe(GameModifierType.ShortPlatforms, this);
+        EffectsManager.Subscribe(GameModifierType.LongPlatforms, this);
         EffectsManager.Subscribe(GameModifierType.Enemy, this);
         PlatformHideLocation = _maxMinHeight.x - 2;
         _platformPool = new ObjectPool<Platform>(() => Instantiate(_platform, _container),
@@ -132,7 +133,8 @@ public class PlatformMover : MonoBehaviour, IEffectable
         switch (modifier.Type)
         {
             case GameModifierType.BreakablePlatforms: ApplyBreakablePlatform(5); break;
-            case GameModifierType.ShortPlatforms: ApplyShortPlatforms(5); break;
+            case GameModifierType.ShortPlatforms: ApplyModifierPlatforms(5, PlatformState.Short); break;
+            case GameModifierType.LongPlatforms: ApplyModifierPlatforms(5, PlatformState.Long); break;
             case GameModifierType.Enemy: GenerateEnemy(modifier.Prefab); break;
         }
     }
@@ -148,14 +150,14 @@ public class PlatformMover : MonoBehaviour, IEffectable
         enemy.SetView(enemyVisual);
     }
 
-    private void ApplyShortPlatforms(float duration)
+    private void ApplyModifierPlatforms(float duration, PlatformState platformState)
     {
         foreach (var platform in _platforms)
-            platform.Settings.Short = true;
+            platform.Settings.State = platformState;
         Utils.RunTimer(duration, () =>
         {
             foreach (var platform in _platforms)
-                platform.Settings.Short = false;
+                platform.Settings.State = PlatformState.None;
         }).Forget();
     }
 

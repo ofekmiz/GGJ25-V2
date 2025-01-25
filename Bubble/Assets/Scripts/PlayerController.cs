@@ -24,12 +24,14 @@ public class PlayerController : MonoBehaviour , IEffectable
     public Rigidbody2D Rigidbody => _rigidbody;
     private float _moveDirection;
     private float _jumpDirection;
-    
+    private GameObject _shield;
+
     private struct PlayerSettings
     {
         public float MoveSpeed;
         public float JumpForce;
         public float FallIncrement;
+        public bool HasShield;
     }
 
     private void OnDrawGizmos()
@@ -113,6 +115,17 @@ public class PlayerController : MonoBehaviour , IEffectable
         {
             OnPlayerDeath?.Invoke();
         }
+        if (other.CompareTag("Enemy"))
+        {
+            if (_playerSettings.HasShield)
+            {
+                Destroy(other.gameObject);
+                Destroy(_shield);
+                return;
+            }
+            OnPlayerDeath?.Invoke();
+        }
+        
         else if (other.CompareTag("Effect"))
         {
             var effectItem = other.GetComponent<EffectItem>();
@@ -120,33 +133,34 @@ public class PlayerController : MonoBehaviour , IEffectable
             Destroy(other.gameObject);
         }
     }
-    
+
     public void ApplyEffect(GameModifier modifier)
     {
         switch (modifier.Type)
         {
-            case GameModifierType.Jump: 
-                ApplyJumpModifier(3); 
-                break;
-            case GameModifierType.JetPack: 
-                ApplyJetPack(3); 
-                break;
-            case GameModifierType.Goggles: //show goggles on player
-                break;
+            case GameModifierType.Jump: ApplyJumpModifier(3); break; 
+            case GameModifierType.JetPack: ApplyJetPack(3); break;
+            case GameModifierType.Shield: AddShied(modifier); return;
         }
 
         Spawn(modifier);
     }
 
-    private void Spawn(GameModifier modifier)
+    private void AddShied(GameModifier modifier)
+    {
+        _playerSettings.HasShield = true;
+        _shield = Spawn(modifier);
+    }
+
+    private GameObject Spawn(GameModifier modifier)
     {
         if(!modifier.Prefab)
-            return;
+            return null;
         var spawnPointIndex = _spawnPoints.FindIndex(p => p.Key == modifier.Type);
         if(spawnPointIndex < 0)
-            return;
+            return null;
         var spawnPoint = _spawnPoints[spawnPointIndex];
-        Instantiate(modifier.Prefab, spawnPoint.Parent);
+        return Instantiate(modifier.Prefab, spawnPoint.Parent);
     }
 
     private void ApplyJetPack(float duration)
@@ -155,11 +169,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         _playerSettings.FallIncrement = 0;
         Utils.RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
     }
-
-    public void DisableEffect()
-    {
-     
-    }
+    
 
     private void ApplyJumpModifier(float duration)
     {
