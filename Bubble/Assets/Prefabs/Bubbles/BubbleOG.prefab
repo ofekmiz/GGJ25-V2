@@ -177,14 +177,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 281d85431fa23405e82112edcfee589b, type: 3}
   - {fileID: 21300000, guid: c36d981f5d44342ad951f0145930e72c, type: 3}
   _badSprites:
-  - {fileID: 21300000, guid: 142677f018b0d46208a742b35f69ed2f, type: 3}
-  - {fileID: 21300000, guid: a45f137a691cf4efda511a56bb34ce16, type: 3}
-  - {fileID: 21300000, guid: 0a43d712bb6524886b726e263b1339f6, type: 3}
-  - {fileID: 21300000, guid: b4ef35f98a8e943e2aa29c828c43333b, type: 3}
-  - {fileID: 21300000, guid: 11f0d945a4e4a42b58ac5018b027e9af, type: 3}
-  - {fileID: 21300000, guid: f57b44d85291241778c8da4713b5e748, type: 3}
-  - {fileID: 21300000, guid: 281d85431fa23405e82112edcfee589b, type: 3}
-  - {fileID: 21300000, guid: c36d981f5d44342ad951f0145930e72c, type: 3}
+  - {fileID: 21300000, guid: 2e1f1c120b95c41e7b7e6a69531a4267, type: 3}
+  - {fileID: 21300000, guid: c7fec90add9094a9ea438fab8f7aa541, type: 3}
+  - {fileID: 21300000, guid: d573dd17c10134e339473f0ca7f47bb7, type: 3}
+  - {fileID: 21300000, guid: 9e49c33dc9ab94a1e8ed1d9adbafb871, type: 3}
+  - {fileID: 21300000, guid: 0f5eef8962b754d799e424103ddfc63a, type: 3}
+  - {fileID: 21300000, guid: ffe3753a11a734e7da6df0d8c91e93aa, type: 3}
+  - {fileID: 21300000, guid: cee07222ace8c401ea64432edf263bf6, type: 3}
   _bubbleSprite: {fileID: 7285256816361300122}
 --- !u!58 &3310852991131699833
 CircleCollider2D:
