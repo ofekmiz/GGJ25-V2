@@ -352,6 +352,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fac5bd014f1f3904a88354638542e226, type: 3}
+--- !u!114 &876271677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7306135499657421016, guid: fac5bd014f1f3904a88354638542e226, type: 3}
+  m_PrefabInstance: {fileID: 672672153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f4af3762d7b40508e8b7554ed7bfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1046377746 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5316062539140806156, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
@@ -620,6 +631,34 @@ PrefabInstance:
     - target: {fileID: 2062029098073990966, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
       propertyPath: m_Name
       value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 876271677}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Domains.Core.GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904908102602561117, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5590109619457789781, guid: d71cac6f95da0ba44acdb812973ef28e, type: 3}
       propertyPath: m_Name

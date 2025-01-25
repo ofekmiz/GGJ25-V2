@@ -31,6 +31,7 @@ namespace Domains.Core
         
         private Dependencies _dependencies;
         private float _timeInterval = 0.5f;
+        private float _counter = 0f;
         public int GameTimer { get; private set; }
         private EffectsManager _effectsManager;
 
@@ -48,6 +49,7 @@ namespace Domains.Core
             
             //TODO::move to init later
             _bubbleSpawner.Init(_gameModifiersManager);
+            _bubbleSpawner.BeginsSpawn();
             _audioManager.Init();
             _audioManager.PlayBgAudio();
 
@@ -76,11 +78,20 @@ namespace Domains.Core
             _isGameOver = true;
             _gameOverScreen.gameObject.SetActive(true);
             _gameOverScreen.SetScore(int.Parse(_timer.text));
+            _bubbleSpawner.DestoryAllBubbles();
         }
 
         public void GameModifierCollected(GameModifier modifierType)
         {
             _effectsManager.PlayEffect(modifierType);
+        }
+
+        public void RestartGame()
+        {
+            _isGameOver = false;
+            _counter = 0f;
+            _bubbleSpawner.BeginsSpawn();
+            _gameOverScreen.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -158,15 +169,15 @@ namespace Domains.Core
         private async UniTaskVoid RunTimer()
         {
             GameTimer = 0;
-            var counter = 0f;
+            _counter = 0f;
             while (!_isGameOver) // add death cond
             {
-                counter += Time.deltaTime;
+                _counter += Time.deltaTime;
                 await UniTask.NextFrame();
-                if (!(counter >= _timeInterval)) 
+                if (!(_counter >= _timeInterval)) 
                     continue;
                 GameTimer++;
-                counter = 0;
+                _counter = 0;
                 _timer.text = GameTimer.ToString("D6");
             }
         }
