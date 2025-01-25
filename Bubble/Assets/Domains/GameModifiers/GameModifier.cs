@@ -24,6 +24,7 @@ public enum GameModifierType
     Sword,
     BreakablePlatforms,
     ShortPlatforms,
+    LongPlatforms,
     Enemy,
     Shield,
     Random
