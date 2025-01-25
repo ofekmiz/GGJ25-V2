@@ -45,16 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameModifiers:
-  - Type: 0
-    Icon: {fileID: 21300000, guid: f9645f8728ad7483f9b86be957beb5c0, type: 3}
-    Good: 1
-    Prefab: {fileID: 0}
   - Type: 1
     Icon: {fileID: 21300000, guid: 7a8cc66df6aa24718b4303ff5cf9c535, type: 3}
-    Good: 1
-    Prefab: {fileID: 0}
-  - Type: 2
-    Icon: {fileID: 21300000, guid: 46d009df0886f4030ac50b420291d352, type: 3}
     Good: 1
     Prefab: {fileID: 0}
   - Type: 3
@@ -80,7 +72,7 @@ MonoBehaviour:
   - Type: 11
     Icon: {fileID: 21300000, guid: 130475d7ab08a4deeb7b4c476fed23f8, type: 3}
     Good: 1
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 4670996700317748366, guid: b2f050147f3e14e5e9bfed3948c15dbb, type: 3}
   - Type: 3
     Icon: {fileID: 21300000, guid: b1187e1d2a5614a61af917807b3ebe4a, type: 3}
     Good: 1
