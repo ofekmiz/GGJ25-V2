@@ -12,6 +12,6 @@ public class InGameUI : MonoBehaviour
 
     private void Awake()
     {
-        _ftueButton.onClick.AddListener(()=>_ftueScreen.Show());
+        _ftueButton.onClick.AddListener(()=>_ftueScreen.Show(null));
     }
 }
