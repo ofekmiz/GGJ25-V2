@@ -308,22 +308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3031590822117564535, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3031590822117564535, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 88
-      objectReference: {fileID: 0}
     - target: {fileID: 3189429499226700754, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
       propertyPath: _canvasGroup
       value: 
       objectReference: {fileID: 1318586859292966696}
-    - target: {fileID: 3833631953034029506, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 5317454721607375023, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
       propertyPath: m_Name
       value: StartMenu
@@ -331,28 +319,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5317454721607375023, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1318586859292966696}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
---- !u!1 &1318586859292966695 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5317454721607375023, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
+--- !u!225 &1318586859292966696 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1154264082924627060, guid: accf4cfeb4663cf4eadf161c77ee709a, type: 3}
   m_PrefabInstance: {fileID: 1318586859292966694}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &1318586859292966696
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318586859292966695}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
