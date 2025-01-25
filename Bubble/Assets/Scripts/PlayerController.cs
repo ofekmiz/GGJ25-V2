@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         EffectsManager.Subscribe(GameModifierType.JetPack, this);
         EffectsManager.Subscribe(GameModifierType.Jump, this);
         EffectsManager.Subscribe(GameModifierType.Goggles, this);
+        EffectsManager.Subscribe(GameModifierType.Hat, this);
         _playerSettings = new()
         {
             MoveSpeed = _moveSpeed,
