@@ -23,6 +23,11 @@ public class PlatformMover : MonoBehaviour, IEffectable
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private Vector2 _enemyMaxMinHeight;
     [SerializeField] private float _shortState = 0.5f;
+    [SerializeField] private Trampoline _trampolinePrefab;
+    [SerializeField] private float _spawnDistance = 20f;
+    
+    [SerializeField] private PlayerController _playerController;
+    
     public static float PlatformHideLocation { get; private set; }
     private float _position;
     private float _timer;
@@ -47,6 +52,8 @@ public class PlatformMover : MonoBehaviour, IEffectable
         EffectsManager.Subscribe(GameModifierType.ShortPlatforms, this);
         EffectsManager.Subscribe(GameModifierType.LongPlatforms, this);
         EffectsManager.Subscribe(GameModifierType.Enemy, this);
+        EffectsManager.Subscribe(GameModifierType.Trampoline, this);
+        
         PlatformHideLocation = _maxMinHeight.x - 2;
         _platformPool = new ObjectPool<Platform>(() => Instantiate(_platform, _container),
             t => t.gameObject.SetActive(true),
@@ -140,6 +147,7 @@ public class PlatformMover : MonoBehaviour, IEffectable
             case GameModifierType.LongPlatforms: ApplyModifierPlatforms(5, PlatformState.Long); break;
             case GameModifierType.Slow: SlowSpeed(); break;
             case GameModifierType.Enemy: GenerateEnemy(modifier.Prefab); break;
+            case GameModifierType.Trampoline: GenerateTrampoline(modifier.Prefab); break;
         }
     }
 
@@ -158,6 +166,32 @@ public class PlatformMover : MonoBehaviour, IEffectable
         var enemy = Instantiate(_enemyPrefab, _container);
         enemy.transform.position = pos;
         enemy.SetView(enemyVisual);
+    }
+
+    private void GenerateTrampoline(GameObject trampolineVisual)
+    {
+        var targetPlatform = getPlatformNearPlayer();
+        var trampoline = Instantiate(_trampolinePrefab);
+        trampoline.transform.SetParent(targetPlatform.transform);
+        trampoline.transform.position = targetPlatform.TopPoint.position;
+    }
+
+    private Platform getPlatformNearPlayer()
+    {
+        float playerX = _playerController.transform.position.x;
+
+        Platform nearestPlatform = _platforms[^1];
+        
+        for (int i = 0; i < _platforms.Count; i++)
+        {
+            float platformX = _platforms[i].transform.position.x;
+            if (platformX > playerX + _spawnDistance && Mathf.Abs(platformX-playerX) < Mathf.Abs(nearestPlatform.transform.position.x - playerX))
+            {
+                nearestPlatform = _platforms[i];
+            }
+        }
+
+        return nearestPlatform;
     }
 
     private void ApplyModifierPlatforms(float duration, PlatformState platformState)
