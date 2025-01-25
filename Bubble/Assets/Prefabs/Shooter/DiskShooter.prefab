@@ -232,7 +232,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8264901274968164773, guid: e7520e71fd6e74a24bb44b01564e92e3, type: 3}
       propertyPath: m_Name
-      value: Bed
+      value: SleepingGuy
       objectReference: {fileID: 0}
     - target: {fileID: 8406361631524031157, guid: e7520e71fd6e74a24bb44b01564e92e3, type: 3}
       propertyPath: m_LocalPosition.x
