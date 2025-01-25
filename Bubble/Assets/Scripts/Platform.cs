@@ -9,18 +9,22 @@ public struct PlatformInitArgs
 {
 	public Vector3 Position;
 	public bool ShowOnStart;
+	public bool Breakable;
+	public bool Short;
 }
 
 public class Platform : MonoBehaviour
 {
 	public static Action<Platform> OnReachEdge;
-	public static Action<Rigidbody2D> OnPlayerGround;
+	public static Action<Platform> OnReachStart;
+	public static Action<PlayerController> OnPlayerGround;
 	[SerializeField] private bool _dontHidePlatform;
 
-	private PlatformInitArgs _args;
+	public PlatformInitArgs Settings;
+	public bool IsShown { get; private set; }
 	public void Set(PlatformInitArgs args)
 	{
-		_args = args;
+		Settings = args;
 		if (args.ShowOnStart)
 			Show().Forget();
 		var pos = args.Position;
@@ -30,8 +34,15 @@ public class Platform : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		if(other.collider.CompareTag("Player"))
-			OnPlayerGround?.Invoke(other.rigidbody);
+		var player = other.transform.GetComponent<PlayerController>();
+		if (!player) 
+			return;
+		OnPlayerGround?.Invoke(player);
+		if (!Settings.Breakable || !IsShown) 
+			return;
+		IsShown = false;
+		transform.DOShakePosition(2, 0.1f).SetLink(gameObject);
+		Utils.RunTimer(2, Hide().Forget).Forget();
 	}
 
 	private void OnCollisionExit2D(Collision2D other)
@@ -47,17 +58,22 @@ public class Platform : MonoBehaviour
 		if (other.CompareTag("Edge"))
 			Hide().Forget();
 		if (other.CompareTag("Start"))
+		{
+			OnReachStart?.Invoke(this);
 			Show().Forget();
+		}
 	}
 
 	private async UniTaskVoid Hide()
 	{
 		await transform.DOLocalMoveY(PlatformMover.PlatformHideLocation, .5f).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
+		IsShown = false;
 		OnReachEdge?.Invoke(this);
 	}
 	
 	private async UniTaskVoid Show()
 	{
-		await transform.DOLocalMoveY(_args.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
+		IsShown = true;
+		await transform.DOLocalMoveY(Settings.Position.y, 1).SetEase(Ease.InOutBack).AsyncWaitForCompletion();
 	}
 }

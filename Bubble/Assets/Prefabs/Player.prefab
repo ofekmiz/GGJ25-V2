@@ -143,7 +143,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 63
   _groundCheck: {fileID: 7517931755191048042}
-  _fallIncrement: 10
+  _fallIncrement: 20
 --- !u!50 &3757283475958145802
 Rigidbody2D:
   serializedVersion: 4

@@ -20,5 +20,7 @@ public enum GameModifierType
     Pistol,
     RubberFloat,
     Sword,
+    BreakablePlatforms,
+    ShortPlatforms,
     Random
 }

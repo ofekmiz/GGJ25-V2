@@ -1,7 +1,5 @@
 using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PlayerController : MonoBehaviour , IEffectable
@@ -19,7 +17,8 @@ public class PlayerController : MonoBehaviour , IEffectable
     private const string Horizontal = "Horizontal";
     
     private PlayerSettings _playerSettings; 
-    private bool _isGrounded;
+    public bool IsGrounded {get; private set;}
+    public Rigidbody2D Rigidbody => _rigidbody;
     private float _moveDirection;
     private float _jumpDirection;
     
@@ -74,20 +73,19 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void Fall()
     {
-        if(_isGrounded)
+        if(IsGrounded)
             return;
         _rigidbody.velocity -= Vector2.up * (_playerSettings.FallIncrement * Time.fixedDeltaTime);
-        Debug.Log($"Falling {_rigidbody.velocity}");
     }
 
     private void CheckOnGround()
     {
-        _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+        IsGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
     }
 
     private void Jump()
     {
-        if (_isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
+        if (IsGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             _jumpDirection = _jumpForce;
         }
@@ -113,9 +111,9 @@ public class PlayerController : MonoBehaviour , IEffectable
         }
     }
     
-    public void ApplyEffect(GameModifierType modifierType)
+    public void ApplyEffect(GameModifierType type)
     {
-        switch (modifierType)
+        switch (type)
         {
             case GameModifierType.Jump: 
                 ApplyJumpModifier(3); 
@@ -131,8 +129,9 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void ApplyJetPack(float duration)
     {
+        Debug.Log("Player got Jet Pack!");
         _playerSettings.FallIncrement = 0;
-        RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
+        Utils.RunTimer(duration, () => _playerSettings.FallIncrement = _fallIncrement).Forget();
     }
 
     public void DisableEffect()
@@ -142,20 +141,8 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void ApplyJumpModifier(float duration)
     {
+        Debug.Log("Player got Jump Modifier!");
         _playerSettings.JumpForce += 2;
-        RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
-    }
-
-    private async UniTaskVoid RunTimer(float duration, Action onEnd)
-    {
-        if (duration == 0)
-            return;
-        
-        while (duration > 0 )
-        {
-            duration -= Time.deltaTime;
-            await UniTask.NextFrame();
-        }
-        onEnd?.Invoke();
+        Utils.RunTimer(duration, () => _playerSettings.JumpForce -= 2f).Forget();
     }
 }
