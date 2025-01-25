@@ -20,8 +20,12 @@ public class StartMenu : MonoBehaviour
 
     private void OnStartClicked()
     {
-        gameObject.SetActive(false);
-        _gm.Init();
+        //gameObject.SetActive(false);
+        //_gm.Init();
+
+        SceneManager.LoadScene("GameScene");
+        SceneManager.UnloadSceneAsync("StartMenu");
+        
     }
 
     private void OnDestroy()
