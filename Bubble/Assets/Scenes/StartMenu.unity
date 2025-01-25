@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FTUEScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4219675599608814550, guid: cfa3322b0dce54c3685396737fa4727b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
