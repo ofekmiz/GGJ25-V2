@@ -51,7 +51,8 @@ public class BubbleSpawner : MonoBehaviour
     {
         for (int i = 0; i < _startingBubbles; i++)
         {
-            Destroy(_bubbles[i].gameObject);
+            if(_bubbles[i])
+                Destroy(_bubbles[i].gameObject);
         }
         _bubbles.Clear();
     }
