@@ -1134,6 +1134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Dream
       objectReference: {fileID: 0}
+    - target: {fileID: 3204778683974736943, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4425091313070756183, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
       propertyPath: m_Enabled
       value: 1
