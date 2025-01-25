@@ -97,7 +97,7 @@ namespace Domains.Core
         public void RestartGame()
         {
             SceneManager.LoadScene("GameScene");
-            _startMenu?.gameObject.SetActive(false);
+            //_startMenu?.gameObject.SetActive(false);
             //_isGameOver = false;
             //_counter = 0f;
             //_bubbleSpawner.BeginsSpawn();
