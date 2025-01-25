@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 1.0f;
+    [SerializeField] private float moveSpeed = 0.1f;
+    [SerializeField] private float deceleration = 0.15f;
+    private float currentSpeed = 0f;
 
-    private void Update()
+    void Update()
     {
-        transform.Rotate(new Vector3(0, 0, Input.GetAxis("Horizontal2") * _speed));
+        float input = Input.GetAxis("Horizontal2");
+        if (input != 0)
+        {
+            currentSpeed += input * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            if (currentSpeed > 0)
+                currentSpeed -= deceleration * Time.deltaTime;
+            else if (currentSpeed < 0)
+                currentSpeed += deceleration * Time.deltaTime;
+        }
+
+        transform.Rotate(Vector3.forward * currentSpeed);
     }
 }
