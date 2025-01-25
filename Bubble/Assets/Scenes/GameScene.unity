@@ -339,6 +339,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1192573008}
     - target: {fileID: 7306135499657421016, guid: fac5bd014f1f3904a88354638542e226, type: 3}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 1046377746}
+    - target: {fileID: 7306135499657421016, guid: fac5bd014f1f3904a88354638542e226, type: 3}
       propertyPath: _bubblesManager
       value: 
       objectReference: {fileID: 54994211}
@@ -351,6 +355,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fac5bd014f1f3904a88354638542e226, type: 3}
+--- !u!114 &1046377746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5316062539140806156, guid: 8b390ca5225b94854bddcca65846675f, type: 3}
+  m_PrefabInstance: {fileID: 2607121191388399378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97804f62eac7e1e4d8b310e607619676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1192573008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1922178598909287602, guid: 841c367e70e9441c78442c1e64580a6c, type: 3}

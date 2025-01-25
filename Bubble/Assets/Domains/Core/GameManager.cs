@@ -27,9 +27,12 @@ namespace Domains.Core
         public IBubbleFactory BubbleFactory => _dependencies.BubbleFactory;
         public BubblesManager BubblesManager => _dependencies.BubblesManager;
 
+        public static GameManager Instance; //Sorry not sorry
+
 
         private void Awake()
         {
+            Instance = this;
             _bubbleSpawner.Init(_gameModifiersManager); //TODO::move to init later
         }
 
@@ -44,6 +47,11 @@ namespace Domains.Core
 
             _bubbleFactory.Init(this, _bubblePoolParent);
             _bubblesManager.Init(this, BubbleFactory);
+        }
+
+        public void GameModifierCollected(GameModifierType modifierType)
+        {
+            _playerManager.GameModifierCollected(modifierType);
         }
 
         private void Start()

@@ -18,12 +18,20 @@ public class Bullet : MonoBehaviour
             die();
     }
 
+    protected virtual void OnHitModifier(ModifierBubble modifierBubble)
+    {
+        
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (_dead) //prevent hitting 2 on same frame
             return;
         
-        Destroy(other.gameObject);
+        ModifierBubble modifierBubble = other.gameObject.GetComponent<ModifierBubble>();
+        if (modifierBubble != null)
+            OnHitModifier(modifierBubble);
+        
         die();
     }
 

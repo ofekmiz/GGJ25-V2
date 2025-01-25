@@ -6,5 +6,8 @@ using UnityEngine;
 
 public class DestroyingBullet : Bullet
 {
-    
+    protected override void OnHitModifier(ModifierBubble modifierBubble)
+    {
+        Destroy(modifierBubble.gameObject);
+    }
 }

@@ -6,11 +6,11 @@ using UnityEngine;
 [Serializable]
 public class GameModifier
 {
-    public ModifierType Type;
+    public GameModifierType Type;
     public Sprite Icon;
 }
 
-public enum ModifierType
+public enum GameModifierType
 {
     FireExtinguisher,
     Goggles,

@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class PlayerController : MonoBehaviour , IEffectable
@@ -83,7 +84,7 @@ public class PlayerController : MonoBehaviour , IEffectable
 
     private void Jump()
     {
-        if (_isGrounded && Input.GetButtonDown("Jump"))
+        if (_isGrounded && (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W)))
         {
             _jumpDirection = _jumpForce;
         }
@@ -132,6 +133,22 @@ public class PlayerController : MonoBehaviour , IEffectable
     public void DisableEffect()
     {
      
+    }
+
+    public void GameModifierCollected(GameModifierType modifierType)
+    {
+        if (modifierType == GameModifierType.Random)
+            modifierType = (GameModifierType)Random.Range(0, Enum.GetValues(typeof(GameModifierType)).Length - 1);
+        
+        switch (modifierType)
+        {
+            case GameModifierType.Jump: applyJumpModifier(); break;
+        }
+    }
+
+    private void applyJumpModifier()
+    {
+        _playerSettings.JumpForce += 2;
     }
 }
 
