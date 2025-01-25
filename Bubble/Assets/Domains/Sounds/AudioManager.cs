@@ -35,12 +35,6 @@ public class AudioManager : MonoBehaviour
         [Range(0f, 1f)] public float Volume;
     }
 
-    private void Awake()
-    {
-        Init();
-        PlayBgAudio();
-    }
-
     public void Init()
     {
         _gameAudioSources = new AudioSourceData[_audioSourceCount];
