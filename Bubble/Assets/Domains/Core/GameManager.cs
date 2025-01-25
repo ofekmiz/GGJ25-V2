@@ -23,6 +23,8 @@ namespace Domains.Core
         [SerializeField] private BubbleSpawner _bubbleSpawner;
         [SerializeField] private GameModifiersManager _gameModifiersManager;
         [SerializeField] private GameOverManager _gameOverManager;
+        
+        [SerializeField] private AudioManager _audioManager;
 
         private bool _isGameOver = false;
         
@@ -42,7 +44,11 @@ namespace Domains.Core
         {
             _effectsManager = new();
             Instance = this;
-            _bubbleSpawner.Init(_gameModifiersManager); //TODO::move to init later
+            
+            //TODO::move to init later
+            _bubbleSpawner.Init(_gameModifiersManager);
+            _audioManager.Init();
+            _audioManager.PlayBgAudio();
         }
 
         public void Init()
