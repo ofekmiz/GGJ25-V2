@@ -234,4 +234,14 @@ public class PlatformMover : MonoBehaviour, IEffectable
                 platform.Settings.Breakable = false;
         }).Forget();
     }
+
+    private void OnDestroy()
+    {
+        EffectsManager.Unsubscribe(GameModifierType.BreakablePlatforms, this);
+        EffectsManager.Unsubscribe(GameModifierType.ShortPlatforms, this);
+        EffectsManager.Unsubscribe(GameModifierType.LongPlatforms, this);
+        EffectsManager.Unsubscribe(GameModifierType.Enemy, this);
+        EffectsManager.Unsubscribe(GameModifierType.Blocker, this);
+        EffectsManager.Unsubscribe(GameModifierType.Trampoline, this);
+    }
 }
