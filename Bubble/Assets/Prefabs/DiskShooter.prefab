@@ -80,7 +80,8 @@ MonoBehaviour:
   startShootInterval: 8
   endShootInterval: 1
   gameTime: 60
-  _bulletPrefab: {fileID: 4002180746476664244, guid: bb13be0bf64b04abfa15fdbb51a09e70, type: 3}
+  _goodBulletPrefab: {fileID: 4002180746476664244, guid: bb13be0bf64b04abfa15fdbb51a09e70, type: 3}
+  _destroyingBulletPrefab: {fileID: 100274801332387669, guid: 78ea56c379f9c40fdaa94cd00d577498, type: 3}
   _spawnPoint: {fileID: 8895010182374792398}
 --- !u!1 &5213702177755954204
 GameObject:

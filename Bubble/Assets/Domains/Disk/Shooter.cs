@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Shooter : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float endShootInterval = 1;
     [SerializeField] private float gameTime = 60;
 
-    [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private GoodBullet _goodBulletPrefab;
+    [SerializeField] private DestroyingBullet _destroyingBulletPrefab;
     [SerializeField] private Transform _spawnPoint;
     
     
@@ -25,23 +27,35 @@ public class Shooter : MonoBehaviour
     {
         _playTime += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            shoot();
+            shootDestroyingBullet();
+            return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            shootGoodBullet();
             return;
         }
         
         _timeToNextShot -= Time.deltaTime;
         if (_timeToNextShot <= 0)
-            shoot();
+            shootGoodBullet();
     }
 
-    private void shoot()
+    private void shootGoodBullet()
     {
         float currentShootInterval = Mathf.Lerp(startShootInterval, endShootInterval, _playTime / gameTime);
         _timeToNextShot = currentShootInterval;
 
-        Bullet bullet = Instantiate(_bulletPrefab);
-        bullet.transform.position = _spawnPoint.position;
+        GoodBullet goodBullet = Instantiate(_goodBulletPrefab);
+        goodBullet.transform.position = _spawnPoint.position;
+    }
+    
+    private void shootDestroyingBullet()
+    {
+        DestroyingBullet destroyingBullet = Instantiate(_destroyingBulletPrefab);
+        destroyingBullet.transform.position = _spawnPoint.position;
     }
 }

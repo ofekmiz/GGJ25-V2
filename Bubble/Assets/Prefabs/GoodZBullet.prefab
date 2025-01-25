@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 39091326664846319}
   - component: {fileID: 297047875773499156}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: GoodZBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
