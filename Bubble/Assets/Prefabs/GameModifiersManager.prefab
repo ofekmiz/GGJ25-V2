@@ -81,7 +81,3 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 0db0058cfa724490b8fa73dfd44ae77a, type: 3}
     Good: 1
     Prefab: {fileID: 8998833115869612821, guid: 812a642c935544f35a01bcf60d2e0faa, type: 3}
-  - Type: 9
-    Icon: {fileID: 21300000, guid: 5b569f25b018b472199111cdfa558f3c, type: 3}
-    Good: 1
-    Prefab: {fileID: 0}

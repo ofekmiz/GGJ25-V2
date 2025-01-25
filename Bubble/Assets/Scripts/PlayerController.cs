@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour , IEffectable
         EffectsManager.Subscribe(GameModifierType.Goggles, this);
         EffectsManager.Subscribe(GameModifierType.Hat, this);
         EffectsManager.Subscribe(GameModifierType.Shield, this);
+        EffectsManager.Subscribe(GameModifierType.Slow, this);
         _playerSettings = new()
         {
             MoveSpeed = _moveSpeed,
@@ -229,7 +230,8 @@ public class PlayerController : MonoBehaviour , IEffectable
         EffectsManager.Unsubscribe(GameModifierType.JetPack, this);
         EffectsManager.Unsubscribe(GameModifierType.Jump, this);
         EffectsManager.Unsubscribe(GameModifierType.Goggles, this);
-        EffectsManager.Subscribe(GameModifierType.Shield, this);
-        EffectsManager.Subscribe(GameModifierType.Hat, this);
+        EffectsManager.Unsubscribe(GameModifierType.Shield, this);
+        EffectsManager.Unsubscribe(GameModifierType.Hat, this);
+        EffectsManager.Unsubscribe(GameModifierType.Slow, this);
     }
 }
