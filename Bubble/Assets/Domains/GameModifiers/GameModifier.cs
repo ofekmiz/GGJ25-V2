@@ -26,5 +26,6 @@ public enum GameModifierType
     Slow,
     Background,
     Trampoline,
-    Random
+    Random,
+    Blocker
 }

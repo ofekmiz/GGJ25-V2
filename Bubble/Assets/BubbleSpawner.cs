@@ -38,7 +38,7 @@ public class BubbleSpawner : MonoBehaviour
             Instance = this;
     }
 
-    void Start()
+    public void BeginsSpawn()
     {
         for (int i = 0; i < _startingBubbles; i++)
         {
@@ -46,15 +46,25 @@ public class BubbleSpawner : MonoBehaviour
             UniTask.Delay(_delayBetweenBubbles);
         }
     }
+    
+    public void DestoryAllBubbles()
+    {
+        for (int i = 0; i < _startingBubbles; i++)
+        {
+            if(_bubbles[i])
+                Destroy(_bubbles[i].gameObject);
+        }
+        _bubbles.Clear();
+    }
+
+    void Start()
+    {
+        BeginsSpawn();
+    }
 
     public void Init(GameModifiersManager gameModifiersManager)
     {
         _gameModifiersManager = gameModifiersManager;
-    }
-
-    private void StartSpawn()
-    {
-
     }
 
     private void SpawnRandom()
@@ -80,4 +90,9 @@ public class BubbleSpawner : MonoBehaviour
     }
 
     public SpriteRenderer SpawningArea => _spawnArea;
+
+    private void OnDestroy()
+    {
+        Debug.LogError("Destroyed!");
+    }
 }
